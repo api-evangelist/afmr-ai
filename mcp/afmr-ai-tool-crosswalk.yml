@@ -1,0 +1,63 @@
+generated: '2026-09-19'
+method: derived
+source: >-
+  Derived by aligning the live MCP tools/list (mcp/afmr-ai-mcp-tools-list.json, 4 tools, real
+  inputSchemas) and resources/list (8 resources) with openapi/afmr-ai-discovery-api-openapi.yml
+  (OpenAPI 3.1.0, 22 operations incl. the two protocol endpoints). The tool inputSchemas were NOT
+  gated, so each binding below is checked against both the tool schema and the operation.
+purpose: >-
+  Bind each MCP tool to the REST discovery operation(s) that serve the same documents. AFMR's MCP,
+  A2A and REST surfaces are three projections of one small set of static discovery documents; the
+  REST surface is the superset of the afmr.ai-hosted documents, while lookup_failure_mode reaches a
+  document (the AFMR 1.0 machine index) that is NOT served by afmr.ai at all.
+surfaces:
+  rest_openapi: openapi/afmr-ai-discovery-api-openapi.yml     # 22 operations, unauthenticated, 20 GET + 2 POST protocol endpoints
+  graphql: null                                                # no GraphQL surface
+  mcp: https://afmr.ai/api/rpc                                 # tools/list open (not gated); alias https://afmr.ai/mcp
+  a2a: https://afmr.ai/a2a                                     # SendMessage only; answers with the same discovery payload as discover_afmr
+crosswalk:
+  - tool: discover_afmr
+    category: discovery
+    rest: [getAfmrDiscovery, getMachineResourceIndex, getAgentAndToolIndex, getPublicationStatus]
+    binding: rest
+    confidence: high
+    note: >-
+      Tool takes no input and returns the authority map, schemas, registries, endpoints and scope
+      boundaries — the union of /.well-known/afmr.json, /resources.json, /agents.json and
+      /status.json. The A2A SendMessage reply carries the same afmr_discovery data part.
+  - tool: lookup_failure_mode
+    category: registry-lookup
+    rest: []
+    binding: external-resource
+    confidence: high
+    note: >-
+      Input {id: ^AFMR-F[0-9]{3}$ | query: 2-100 chars, limit 1-10}. Backed by the governed AFMR 1.0
+      machine index at https://wulfkaal.github.io/afmr/index.json (also exposed as an MCP resource),
+      which afmr.ai routes to and does not mirror — so NO afmr.ai REST operation serves a failure
+      mode record. Verified live: tools/call id=AFMR-F010 returned "Reward Hacking and Proxy Capture".
+  - tool: get_reputation_attestation_contract
+    category: standards-contract
+    rest: [getReputationAttestationSpecification, getReputationAttestationSchema, getVerifierRequirements, getEndpointConformanceRegistry, getGovernanceVotingContract]
+    binding: rest
+    confidence: high
+    note: Returns the attestation, trust-profile, verifier-result, endpoint-registry and lifecycle contracts; the same five documents are GET operations.
+  - tool: get_lift_evidence_contract
+    category: standards-contract
+    rest: [getLiftEvidenceIndex]
+    binding: rest
+    confidence: high
+    note: The public-card schema it also returns lives on wulfkaal.github.io (MCP resource), not on afmr.ai.
+mcp_only:
+  - tool: lookup_failure_mode
+    reason: Backed by the external governed vocabulary index (wulfkaal.github.io/afmr/index.json); no afmr.ai REST operation returns AFMR-F### records.
+rest_only:
+  discovery_documents: [getA2aAgentCard, getMcpDiscoveryPointer, getMcpRegistryManifest, getCompactAgentOrientation, getExpandedAgentDocumentation, getPublicWorkChangelog, getUpdateFeed, getSitemap, getEvidenceMap]
+  protocol_endpoints: [mcpJsonRpc, mcpListeningStream, a2aSendMessage]
+coverage:
+  tools_named: 4
+  tools_bound_to_rest: 3
+  mcp_only: 1
+  rest_operations_total: 22
+  rest_operations_with_a_tool: 10
+  mcp_resources: 8
+  mcp_resources_on_afmr_ai: 4

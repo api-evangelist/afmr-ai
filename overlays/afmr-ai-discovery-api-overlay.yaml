@@ -1,0 +1,53 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the AFMR Discovery API
+  version: 1.0.0
+  description: >-
+    Generated 2026-09-19 (method: generated). Extends openapi/afmr-ai-discovery-api-openapi.yml
+    without mutating it: adds tags so the 22 operations group by surface, adds the x-agentic-access
+    and x-mcp-tool cross-links captured in agentic-access/ and mcp/afmr-ai-tool-crosswalk.yml, and
+    records the live-observed problem+json behaviour. Nothing here changes a path, parameter or schema.
+extends: ./afmr-ai-discovery-api-openapi.yml
+x-api-evangelist:
+  generated: '2026-09-19'
+  method: generated
+  source: openapi/afmr-ai-discovery-api-openapi.yml + mcp/afmr-ai-tool-crosswalk.yml
+actions:
+  - target: $
+    update:
+      tags:
+        - name: Discovery documents
+          description: Static machine-discovery documents (afmr.json, resources.json, agents.json, server.json, mcp.json, agent-card.json, llms.txt, status.json, changelog.json, feed.xml, sitemap.xml, evidence map).
+        - name: Reputation Attestation
+          description: Working Draft 0.1 specification, JSON Schema, verifier requirements, governance-voting contract and endpoint-conformance registry.
+        - name: Lift Evidence
+          description: Configuration-only Lift Evidence index.
+        - name: Protocol endpoints
+          description: MCP Streamable HTTP (POST /api/rpc) and A2A JSON-RPC (POST /a2a).
+  - target: $.paths[*][?(@.operationId == 'getAfmrDiscovery' || @.operationId == 'getA2aAgentCard' || @.operationId == 'getMcpDiscoveryPointer' || @.operationId == 'getMachineResourceIndex' || @.operationId == 'getMcpRegistryManifest' || @.operationId == 'getAgentAndToolIndex' || @.operationId == 'getCompactAgentOrientation' || @.operationId == 'getExpandedAgentDocumentation' || @.operationId == 'getPublicationStatus' || @.operationId == 'getPublicWorkChangelog' || @.operationId == 'getUpdateFeed' || @.operationId == 'getSitemap' || @.operationId == 'getEvidenceMap')]
+    update:
+      tags: [Discovery documents]
+  - target: $.paths[*][?(@.operationId == 'getReputationAttestationSpecification' || @.operationId == 'getReputationAttestationSchema' || @.operationId == 'getVerifierRequirements' || @.operationId == 'getGovernanceVotingContract' || @.operationId == 'getEndpointConformanceRegistry')]
+    update:
+      tags: [Reputation Attestation]
+  - target: $.paths[*][?(@.operationId == 'getLiftEvidenceIndex')]
+    update:
+      tags: [Lift Evidence]
+  - target: $.paths[*][?(@.operationId == 'mcpJsonRpc' || @.operationId == 'mcpListeningStream' || @.operationId == 'a2aSendMessage')]
+    update:
+      tags: [Protocol endpoints]
+  - target: $.paths['/api/rpc'].post
+    update:
+      x-mcp-tools: [discover_afmr, lookup_failure_mode, get_reputation_attestation_contract, get_lift_evidence_contract]
+      x-mcp-crosswalk: ../mcp/afmr-ai-tool-crosswalk.yml
+  - target: $.paths['/api/rpc'].get
+    update:
+      x-observed-2026-09-19:
+        status: 405
+        allow: POST, OPTIONS
+        content_type: application/problem+json
+  - target: $.info
+    update:
+      x-agentic-access: ../agentic-access/afmr-ai-agentic-access.yml
+      x-error-catalog: ../errors/afmr-ai-problem-types.yml
+      x-conventions: ../conventions/afmr-ai-conventions.yml

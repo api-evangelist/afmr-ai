@@ -1,0 +1,75 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  openapi/afmr-ai-discovery-api-openapi.yml + live response headers and bodies observed on
+  2026-09-19 (GET /, /openapi.json, /nope, /mcp; POST /api/rpc, /a2a) + https://afmr.ai/llms-full.txt
+  + https://afmr.ai/changelog.json (which documents the CORS / cache / Link / problem+json policy).
+description: >-
+  Cross-cutting behaviour of the AFMR Discovery surface. It is a READ-ONLY static-document API
+  plus two JSON-RPC protocol endpoints (MCP, A2A) that are themselves read-only; there is no write
+  surface, so idempotency, reversibility and dry-run are all not-applicable rather than absent.
+base_url: https://afmr.ai
+api_style: REST-style GET of static JSON/text/HTML/XML documents; JSON-RPC 2.0 over POST for MCP (/api/rpc, alias /mcp) and A2A (/a2a)
+authentication:
+  scheme: none — every surface is public read-only
+  detail: authentication/afmr-ai-authentication.yml
+write_surface: none
+idempotency:
+  supported: na
+  coverage: na
+  scope: []
+  note: >-
+    No mutating operation exists. All 20 GET operations are inherently idempotent; the two POST
+    protocol endpoints are read-only JSON-RPC calls, and every MCP tool declares
+    annotations.idempotentHint true / destructiveHint false / readOnlyHint true. No Idempotency-Key
+    header exists because nothing needs one; NO Idempotency pointer is emitted.
+reversibility:
+  status: na
+  write_surfaces: []
+  note: Read-only API — there is nothing to cancel, refund, void or restore. Recorded as na so the dimension leaves the denominator rather than scoring zero.
+dry_run_mode:
+  status: na
+  note: Read-only API; no operation has side effects to rehearse.
+pagination:
+  style: none
+  note: Documents are returned whole. The only paged-shaped input is the MCP tool lookup_failure_mode (limit 1-10, default 5) which caps matches rather than paginating.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+  note: No request-id header is returned; Cloudflare's cf-ray is the only per-request identifier observed.
+caching:
+  cache_control: 'public, max-age=3600, must-revalidate on documents; public, max-age=60 on problem responses'
+  last_modified: exposed (Thu, 30 Jul 2026 00:00:00 GMT on the discovery documents)
+  exposed_headers: ETag, Last-Modified, Link
+  note: The provider explicitly designs for revalidation (changelog 0.1.1-review).
+content_negotiation:
+  note: Each document has a fixed media type (application/json, application/schema+json, text/plain, text/html, application/xml, application/atom+xml); there is no Accept-driven negotiation. MCP requires Accept including application/json (text/event-stream is accepted but no SSE stream is offered).
+cors:
+  access_control_allow_origin: '*'
+  access_control_allow_methods: GET, HEAD, OPTIONS
+  access_control_allow_headers: Accept, Content-Type
+link_relations:
+  on_html: [canonical, alternate (llms.txt / llms-full.txt / resources.json), describedby (afmr.json), service-desc (openapi.json), service-meta (agent-card.json), license]
+  on_problem_responses: [describedby (afmr.json)]
+versioning:
+  scheme: per-component semantic; standards profiles versioned in the URL path (/standards/<profile>/<version>/)
+  header: none
+  detail: lifecycle/afmr-ai-lifecycle.yml
+  changelog: changelog/afmr-ai-changelog.yml
+error_envelope:
+  media_type: application/problem+json
+  rfc9457: true
+  shape: '{ "type": "about:blank", "title", "status", "detail", "instance", + extensions (discovery, resource_index, authority_note, protocol_version, manifest) }'
+  jsonrpc_errors: JSON-RPC 2.0 error objects inside the MCP/A2A envelopes (e.g. -32004 on /a2a for an unsupported method)
+  detail: errors/afmr-ai-problem-types.yml
+rate_limits:
+  documented: false
+  headers_observed: none (no RateLimit-*, X-RateLimit-* or Retry-After on any response)
+  detail: rate-limits/afmr-ai-rate-limits.yml
+claim_boundary: >-
+  The provider repeats one convention across every document: discovery is not admission, admission
+  is not trust, trust is not transaction authority. Agents should treat every response as a bounded
+  fact about a signed record or a published document, never as a safety or capability endorsement.

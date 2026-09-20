@@ -1,0 +1,75 @@
+generated: '2026-09-19'
+method: probed
+source: https://afmr.ai/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: afmr.ai
+  legacy_alias: >-
+    /.well-known/agent.json also answers 200, but with a self-described "legacy_discovery_alias"
+    object that points at the canonical card rather than a second card (saved as
+    afmr-ai-agent-legacy-alias.json). The card is also listed in robots.txt, sitemap.xml,
+    resources.json, agents.json, afmr.json and as Link rel="service-meta" on the homepage.
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '1.0'
+  protocol_version_location: supportedInterfaces[0].protocolVersion
+  preferred_transport: JSONRPC
+  transport_location: supportedInterfaces[0].protocolBinding
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_present:
+    defaultInputModes: true
+    defaultOutputModes: true
+    provider: true
+    documentationUrl: true
+    iconUrl: true
+  deviations: []
+  shape_note: >-
+    The card uses the A2A 1.0 shape — supportedInterfaces[] carrying url + protocolBinding +
+    protocolVersion per interface, with no top-level url / preferredTransport / protocolVersion
+    fields. Graders written for the 0.3 shape (top-level protocolVersion, additionalInterfaces) will
+    read those as absent; they are present, at the 1.0 location.
+card:
+  name: AFMR Discovery Agent
+  url: https://afmr.ai/a2a
+  version: 1.0.0
+  provider_organization: Agent Failure Mode Registry
+  provider_url: https://afmr.ai/
+  documentation_url: https://afmr.ai/llms-full.txt
+  capabilities:
+    streaming: false
+    pushNotifications: false
+    extendedAgentCard: false
+  default_input_modes: [text/plain, application/json]
+  default_output_modes: [text/plain, application/json]
+  skills: 4
+  skill_ids: [discover-afmr, lookup-afmr-failure-mode, discover-reputation-attestation, discover-lift-evidence]
+  file: afmr-ai-agent-card.json
+endpoint_probe:
+  url: https://afmr.ai/a2a
+  method: POST
+  checked: '2026-09-19'
+  results:
+  - request: JSON-RPC method "message/send" (0.3-style)
+    http_status: 400
+    body: '{"jsonrpc":"2.0","id":1,"error":{"code":-32004,"message":"Only the read-only SendMessage operation is supported."}}'
+  - request: JSON-RPC method "SendMessage" with a ROLE_USER text part (1.0-style)
+    http_status: 200
+    body_summary: >-
+      Returned a ROLE_AGENT message with a text/plain part and a structured data part
+      (type afmr_discovery) naming the MCP endpoint, the agent card, the attestation profile URLs
+      and the claim boundary. The agent is live and answers anonymously.
+  auth: none
+x-evidence:
+  fetched: '2026-09-19'
+  url: https://afmr.ai/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json; charset=utf-8
+  last_modified: Thu, 30 Jul 2026 00:00:00 GMT
+  also_probed:
+  - {url: 'https://afmr.ai/.well-known/agent.json', http_status: 200, note: legacy alias object, not a card}
+  - {url: 'https://www.afmr.ai/.well-known/agent-card.json', http_status: 301, note: redirects to the apex card}

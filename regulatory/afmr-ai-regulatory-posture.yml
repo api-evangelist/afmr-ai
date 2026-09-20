@@ -1,0 +1,26 @@
+generated: '2026-09-19'
+method: searched
+probe: true
+source: >-
+  Artifacts harvested this run (well-known/afmr-ai-security.txt, security/afmr-ai-vulnerability-disclosure.yml,
+  lifecycle/afmr-ai-lifecycle.yml, conformance/afmr-ai-conformance.yml) + live probes of afmr.ai
+  conventional paths on 2026-09-19 + https://afmr.ai/llms-full.txt.
+signals: {}
+probed:
+  - {url: 'https://afmr.ai/accessibility', status: 404}
+  - {url: 'https://afmr.ai/legal/subprocessors', status: 404}
+  - {url: 'https://afmr.ai/legal/dpa', status: 404}
+  - {url: 'https://afmr.ai/privacy/requests', status: 404}
+  - {url: 'https://afmr.ai/privacy', status: 404}
+  - {url: 'https://afmr.ai/terms', status: 404}
+  - {url: 'https://afmr.ai/legal', status: 404}
+  - {url: 'https://afmr.ai/transparency', status: 404}
+  - {url: 'https://afmr.ai/security', status: 404}
+  - {url: 'https://afmr.ai/docs/data-residency', status: 404}
+note: >-
+  No regulatory-posture signal is published: no SBOM, support-lifetime statement, accessibility
+  conformance report, AI transparency page, GPC statement, DSR channel, subprocessor list, data
+  residency statement, incident SLA, age-assurance, notice-and-action, transparency report or exit
+  assistance. Consistent with a standards-discovery site that stores no user data and takes no
+  sign-ups. The security.txt carries no Policy field. Empty signals is the measurement, not a gap
+  in the probe.

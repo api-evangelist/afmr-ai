@@ -1,0 +1,65 @@
+generated: '2026-09-19'
+method: derived
+source: openapi/afmr-ai-discovery-api-openapi.yml (components.schemas) + json-schema/afmr-ai-reputation-attestation-0.1-schema.json ($defs and required[])
+description: >-
+  The Discovery API itself has almost no data model — three schemas with no cross-references
+  (JsonRpcRequest, JsonRpcResponse, Problem) — because every GET returns an opaque document. The
+  substantive model is the Reputation Attestation Working Draft 0.1 JSON Schema, whose $defs form
+  the entity graph below.
+entities:
+  - name: JsonRpcRequest
+    source: openapi components.schemas
+    relationships: []
+  - name: JsonRpcResponse
+    source: openapi components.schemas
+    relationships: []
+  - name: Problem
+    source: openapi components.schemas
+    fields: [type, title, status, detail, instance]
+    relationships: []
+  - name: AFMRReputationAttestation
+    source: json-schema/afmr-ai-reputation-attestation-0.1-schema.json (root, type const AFMRReputationAttestation, profile const https://afmr.ai/standards/reputation-attestation/0.1)
+    identifiers: {id: uri}
+    required: [type, profile, id, issuer, subject, standing, governance, afmr, scope, evidence, issued_at, lifecycle, proof]
+relationships:
+  - from: AFMRReputationAttestation
+    to: issuer
+    type: has_one
+    via: issuer
+  - from: AFMRReputationAttestation
+    to: subject
+    type: has_one
+    via: subject
+  - from: AFMRReputationAttestation
+    to: standingRecord
+    type: has_many
+    via: standing[]
+  - from: AFMRReputationAttestation
+    to: governance
+    type: has_one
+    via: governance
+  - from: AFMRReputationAttestation
+    to: afmr
+    type: has_one
+    via: afmr
+  - from: AFMRReputationAttestation
+    to: scope
+    type: has_one
+    via: scope
+  - from: AFMRReputationAttestation
+    to: evidence
+    type: has_one
+    via: evidence
+  - from: AFMRReputationAttestation
+    to: lifecycle
+    type: has_one
+    via: lifecycle
+  - from: AFMRReputationAttestation
+    to: proof
+    type: has_one
+    via: proof
+identifier_schemes:
+  - name: AFMR failure-mode family identifier
+    pattern: '^AFMR-F[0-9]{3}$'
+    source: mcp tools/list lookup_failure_mode.inputSchema.properties.id
+    authority: https://wulfkaal.github.io/afmr/index.json

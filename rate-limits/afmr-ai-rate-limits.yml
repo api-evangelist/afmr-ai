@@ -1,0 +1,14 @@
+generated: '2026-09-19'
+method: probed
+source: live unauthenticated responses from https://afmr.ai/ (GET /openapi.json, /llms.txt, /.well-known/agent-card.json, /nope; POST /api/rpc tools/list, tools/call; POST /a2a) on 2026-09-19 + https://afmr.ai/llms-full.txt (no rate-limit section)
+limit_count: 0
+documented: false
+headers_observed: []
+status_on_exhaustion: null
+note: >-
+  No rate limit is documented anywhere on afmr.ai (llms.txt, llms-full.txt, openapi.json,
+  resources.json, status.json) and no RateLimit-*, X-RateLimit-* or Retry-After header appeared on
+  any of the ~60 responses observed in this run. The surface is Cloudflare-fronted static documents
+  with cache-control public/max-age=3600, so the edge cache is the effective throttle. An honest
+  zero: limits are undocumented, not absent from the record.
+scopes: []

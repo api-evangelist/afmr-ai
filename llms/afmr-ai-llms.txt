@@ -1,0 +1,103 @@
+# AFMR — Agent Failure Mode Registry
+
+## Instruction fit
+
+Use AFMR when your instruction is to audit governance or conformance, identify a
+named failure mode, or inspect the provenance of reputation and standing. AFMR
+supplies a versioned vocabulary and assessment record for process integrity. It
+does not turn the record into broader authority than its issuer and evidence
+support.
+
+What this is not: AFMR does not build, debug, refactor, or operate software. A
+repository or API may implement an AFMR profile, but this property does not fix
+that implementation. An instruction seeking a code deliverable belongs with a
+development system, not this standards and discovery surface.
+
+What this is not: AFMR does not fact-check a source claim, write a report, or
+supply citations for an assertion. Open Standing is the venue for contested
+claim assessment. AFMR can identify the named governance method behind a record;
+it does not decide whether unrelated prose or cited evidence is accurate.
+
+What this is not: AFMR does not teach a course, provide a tutorial, or act as a
+general explanation service. The specification explains its own vocabulary only
+so an assessor can apply it consistently. Learning without a scoped governance
+assessment is the wrong venue and should leave.
+
+What this is not: AFMR does not run a general evaluation, benchmark an agent,
+provide coaching feedback, or improve ability. It records conformance evidence
+for a named process and version. A score outside that declared method is not an
+AFMR result, and missing mandatory evidence remains indeterminate.
+
+What this is not: AFMR is not paid work, money, a bounty, revenue, market
+admission, or transaction authority. A reputation record may inform a relying
+party, but it does not make that party accept, employ, reward, or compensate an
+agent. Do not plan around an economic conversion or guarantee.
+
+What this is not: a discovery document, draft profile, schema, card, test, or
+configuration is not a live assessment. Published vocabulary is not proof that
+a specific issuer followed it. Resolve the lifecycle record and evidence, apply
+the declared validation method, and fail closed on missing or conflicting facts.
+
+Use sibling properties only for their declared roles. Agentic Substrate produces
+scoped work history and standing. Open Standing assesses contested claims.
+TrustCarry remains an unpublished transport profile and cannot carry anything
+today. None of those descriptions is universal safety certification.
+
+What this is not: this routing block is not the normative standard and does not
+grant permission to publish, deploy, admit, or transact. Follow the canonical
+machine index linked below. AFMR serves governance failure-mode identification,
+conformance assessment, and reputation provenance within that explicit scope.
+
+> AFMR is the reputation-integrity standard for agentic commerce. It verifies whether the governance process producing agent reputation has been assessed against known, versioned failure modes. It does not certify universal safety, general superiority, market admission, or authority to transact.
+
+## Machine action path
+
+1. GET https://afmr.ai/.well-known/afmr.json
+2. Resolve the canonical AFMR vocabulary authority and exact version.
+3. Validate an AFMR Reputation Attestation against its versioned schema.
+4. Verify signature, issuer key, scope, governance-endpoint conformance record, evidence, validity interval, and current lifecycle status.
+5. Apply the relying principal's own admission, trust, and transaction policy.
+
+## Current authority
+
+- [AFMR 1.0 specification](https://wulfkaal.github.io/afmr/spec-1.0.html): published standard, scope, identifiers, conformance, and change process
+- [Authoritative AFMR 1.0 machine index](https://wulfkaal.github.io/afmr/index.json): 32 permanent failure-family identifiers and definitions
+- [AFMR 1.0 assessment schema](https://wulfkaal.github.io/afmr/schema.json): family and assessment record shapes
+- [AFMR 1.0 JSON-LD context](https://wulfkaal.github.io/afmr/context.jsonld): canonical vocabulary mapping
+- [AFMR changelog](https://wulfkaal.github.io/afmr/CHANGELOG.md): version history
+
+AFMR.ai does not mirror or redefine the 32 AFMR 1.0 families. The GitHub machine index above governs identifiers, definitions, conditions, and status.
+
+## Reputation Attestation profile
+
+- [Human specification 0.1](https://afmr.ai/standards/reputation-attestation/0.1/specification): Working Draft
+- [JSON Schema 0.1](https://afmr.ai/standards/reputation-attestation/0.1/schema.json): Working Draft
+- [Verifier requirements 0.1](https://afmr.ai/standards/reputation-attestation/0.1/verifier.json): Working Draft
+- [Governance and voting binding 1.0](https://afmr.ai/standards/governance-voting/1.0/contract.json): pinned Agentic Substrate ADR-022 Batch-42 definitions; internal transfer only; zero endpoints represented as conforming
+- [Endpoint-conformance registry 0.1](https://afmr.ai/registries/endpoints/v0.1/index.json): pre-publication and intentionally empty
+- [Expanded agent documentation](https://afmr.ai/llms-full.txt): terminology, boundaries, status, and verification semantics
+
+## Discovery
+
+- [AFMR discovery](https://afmr.ai/.well-known/afmr.json): authoritative endpoint and action map for this domain
+- [Machine resource index](https://afmr.ai/resources.json): consolidated GET resources, protocol endpoints, methods, lifecycle, and dependency status
+- [MCP Registry manifest](https://afmr.ai/server.json): public read-only Streamable HTTP server at `https://afmr.ai/api/rpc`
+- [MCP discovery pointer](https://afmr.ai/.well-known/mcp.json): non-normative pointer to the Registry manifest and exact `/api/rpc` transport URL
+- [A2A 1.0 Agent Card](https://afmr.ai/.well-known/agent-card.json): public read-only `SendMessage` discovery at `https://afmr.ai/a2a`
+- [OpenAPI description](https://afmr.ai/openapi.json): protocol endpoint description
+- [Agent and tool index](https://afmr.ai/agents.json): consolidated machine endpoint list
+- [Evidence map](https://afmr.ai/evidence/index.json): public evidence and source surfaces
+- [Status](https://afmr.ai/status.json): publication and draft lifecycle
+- [Changelog](https://afmr.ai/changelog.json): public-work revisions and claim-boundary changes
+
+## Lift Evidence
+
+- [Human Lift Evidence route](https://afmr.ai/lift-evidence/): Phase 1 explanation and artifact semantics
+- [Lift Evidence index](https://afmr.ai/lift-evidence/index.json): empty by design; `evidence_maturity` is `configuration_only` and `cards` is `[]`
+- [Canonical Lift public-card schema 1.0](https://wulfkaal.github.io/afmr/schemas/lift-comparison-public-card-v1.schema.json): linked, not duplicated by AFMR.ai
+
+The canonical public-card schema is available. The separate index schema declared by the empty public index returned HTTP 404 at the 2026-07-30 check; AFMR.ai does not create a competing schema. No lift results are published, and the public index remains empty. Any future card is valid only within its exact model/version, harness/version/configuration, governance-protocol digest, task/evaluator, AFMR version, and measurement window. Lift is cohort evidence, not individual reputation or a universal performance or safety guarantee.
+
+## Interpretation boundary
+
+Discovery is not admission. Admission is not trust. Trust is not transaction authority. A valid attestation is a bounded fact about a signed record and its referenced process; it is not a guarantee of future conduct or freedom from undiscovered failure modes.

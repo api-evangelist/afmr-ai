@@ -1,0 +1,24 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  registry.npmjs.org/-/v1/search?text=afmr (0 results), pypi.org/pypi/afmr/json (404),
+  api.github.com/search/repositories?q=afmr+agent+failure+mode, https://afmr.ai/resources.json,
+  https://afmr.ai/llms-full.txt and https://afmr.ai/server.json (remotes only — no npm/pypi package
+  entries) on 2026-09-19.
+summary:
+  first_party_sdk_count: 0
+  cli_count: 0
+  note: >-
+    AFMR publishes no client library, CLI or stdio MCP package in any registry. The provider's
+    integration story is deliberately package-free: plain GET of static documents, a hosted
+    Streamable HTTP MCP server (server.json lists remotes only, no packages[]), and an A2A JSON-RPC
+    endpoint. Because no official SDK exists, NO `SDKs` pointer is emitted — sdk_count must read a
+    genuine zero here.
+github:
+  organization: null
+  note: >-
+    The AFMR 1.0 vocabulary source lives under the editor's personal GitHub account
+    (github.com/wulfkaal/wulfkaal.github.io, tree afmr/), named as the source by afmr.json; the
+    governance-voting contract pins github.com/wulfkaal/agentic-reputation-hypercycle. Neither is a
+    package.
+packages: []

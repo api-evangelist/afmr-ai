@@ -1,18 +1,96 @@
 aid: afmr-ai
 name: Agent Failure Mode Registry
-description: 'Agent Failure Mode Registry is a company surfaced via the API Evangelist harvest backlog
-  (source: a2a-registry) and added to the network as a stub for full-pipeline profiling.'
+description: The Agent Failure Mode Registry (AFMR) is a reputation-integrity standard for agentic commerce. AFMR
+  1.0 is a published, citable vocabulary of 32 permanent failure-mode families in eight classes describing how autonomous
+  agent systems fail as designed mechanisms; afmr.ai is the independent public front door and machine-discovery
+  router for it. The site publishes a read-only Discovery API described by an OpenAPI 3.1 document (CC BY 4.0),
+  a public read-only MCP server (Streamable HTTP at /api/rpc, listed in the official MCP Registry as ai.afmr/discovery),
+  an A2A 1.0 agent card and JSON-RPC endpoint, llms.txt / llms-full.txt, a Reputation Attestation Working Draft
+  0.1 (human spec, JSON Schema 2020-12, verifier requirements), a pinned governance-and-voting binding, an intentionally
+  empty endpoint-conformance registry and a configuration-only Lift Evidence index. The AFMR 1.0 vocabulary itself
+  is governed from the editor's GitHub machine index and is not mirrored on afmr.ai.
+image: https://afmr.ai/og.png
 url: https://raw.githubusercontent.com/api-evangelist/afmr-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:a2a-registry
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-19 (local-v3; was a2a-registry harvest stub)
 specificationVersion: '0.20'
 created: '2026-09-19'
 modified: '2026-09-19'
 tags:
 - Company
-apis: []
+- AI Agents
+- Agent Governance
+- Standards
+- Reputation
+- Failure Modes
+- Discovery
+- MCP
+- A2A
+- Machine-Readable Standards
+apis:
+- name: AFMR Discovery API
+  description: 'Read-only discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft and configuration-only
+    Lift Evidence: 21 operations over the discovery documents (afmr.json, agent-card.json, mcp.json, resources.json,
+    server.json, agents.json, llms.txt, status.json, changelog.json, feed.xml, sitemap.xml), the Reputation Attestation
+    specification, JSON Schema and verifier requirements, the governance-voting contract, the endpoint-conformance
+    registry, the evidence map and the Lift Evidence index, plus the MCP JSON-RPC and A2A SendMessage protocol endpoints.
+    No authentication; errors are RFC 9457 application/problem+json.'
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai
+  tags:
+  - Discovery
+  - Standards
+  - Agent Governance
+  - Failure Modes
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-discovery-api-openapi.yml
+  - type: OpenAPI
+    name: Provider-hosted OpenAPI 3.1 (source of the local copy)
+    url: https://afmr.ai/openapi.json
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: Overlay
+    url: overlays/afmr-ai-discovery-api-overlay.yaml
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    name: AFMR Reputation Attestation Working Draft 0.1 (JSON Schema 2020-12, verbatim)
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    name: Provider-hosted schema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+  image: https://afmr.ai/og.png
+- name: AFMR Discovery MCP Server
+  description: Public read-only Model Context Protocol server (ai.afmr/discovery, MCP 2025-11-25, Streamable HTTP,
+    stateless, no SSE listening stream) exposing four tools — discover_afmr, lookup_failure_mode, get_reputation_attestation_contract,
+    get_lift_evidence_contract — and eight resources. Canonical endpoint https://afmr.ai/api/rpc with https://afmr.ai/mcp
+    as an alias; registered in the official MCP Registry.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - MCP
+  - AI Agents
+  - Discovery
+  properties:
+  - type: MCPServer
+    url: mcp/afmr-ai-mcp.yml
+  - type: MCPRegistryManifest
+    url: https://afmr.ai/server.json
+  - type: Documentation
+    url: https://afmr.ai/.well-known/mcp.json
+  - type: ToolCrosswalk
+    url: mcp/afmr-ai-tool-crosswalk.yml
+  - type: MCPToolsList
+    name: Live tools/list response (4 tools, real inputSchemas)
+    url: mcp/afmr-ai-mcp-tools-list.json
+  image: https://afmr.ai/og.png
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -21,3 +99,90 @@ maintainers:
 common:
 - type: Website
   url: https://afmr.ai/
+- type: VulnerabilityDisclosure
+  url: security/afmr-ai-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/afmr-ai-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/afmr-ai-agentic-access.yml
+- type: Documentation
+  url: https://afmr.ai/llms-full.txt
+- type: APIReference
+  url: https://afmr.ai/openapi.json
+- type: GettingStarted
+  name: Machine action path (llms.txt)
+  url: https://afmr.ai/llms.txt
+- type: ChangeLog
+  url: https://afmr.ai/changelog.json
+- type: Feed
+  name: Atom update feed
+  url: https://afmr.ai/feed.xml
+- type: Sitemap
+  url: https://afmr.ai/sitemap.xml
+- type: License
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+- type: GitHub
+  name: wulfkaal — personal GitHub account hosting the governed AFMR 1.0 source (named as source by afmr.json)
+  url: https://github.com/wulfkaal
+- type: SourceCode
+  name: AFMR 1.0 vocabulary, schema and JSON-LD context source
+  url: https://github.com/wulfkaal/wulfkaal.github.io/tree/main/afmr
+- type: Specification
+  name: AFMR 1.0 specification (governed authority, not mirrored on afmr.ai)
+  url: https://wulfkaal.github.io/afmr/spec-1.0.html
+- type: MachineResourceIndex
+  url: https://afmr.ai/resources.json
+- type: DiscoveryDocument
+  url: https://afmr.ai/.well-known/afmr.json
+- type: LLMsTxt
+  name: Verbatim copy of https://afmr.ai/llms.txt
+  url: llms/afmr-ai-llms.txt
+- type: LLMsTxt
+  url: https://afmr.ai/llms.txt
+- type: WellKnown
+  url: well-known/afmr-ai-well-known.yml
+- type: SecurityTxt
+  url: well-known/afmr-ai-security.txt
+- type: Security
+  name: RFC 9116 security.txt — Contact is the homepage URL; no Policy field (see security/afmr-ai-vulnerability-disclosure.yml)
+  url: well-known/afmr-ai-security.txt
+- type: AgentCard
+  url: a2a/afmr-ai-a2a.yml
+- type: Authentication
+  url: authentication/afmr-ai-authentication.yml
+- type: Conformance
+  url: conformance/afmr-ai-conformance.yml
+- type: Lifecycle
+  url: lifecycle/afmr-ai-lifecycle.yml
+- type: Roadmap
+  name: roadmap[] array inside the publication status document
+  url: https://afmr.ai/status.json
+- type: ChangeLog
+  url: changelog/afmr-ai-changelog.yml
+- type: Conventions
+  url: conventions/afmr-ai-conventions.yml
+- type: RateLimits
+  url: rate-limits/afmr-ai-rate-limits.yml
+- type: Plans
+  url: plans/afmr-ai-plans-pricing.yml
+- type: Packages
+  url: packages/afmr-ai-packages.yml
+- type: RegulatoryPosture
+  url: regulatory/afmr-ai-regulatory-posture.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgentSkill
+  name: Discover AFMR resources
+  url: skills/afmr-ai-discover-afmr-resources.md
+- type: AgentSkill
+  name: Fetch the Reputation Attestation contract
+  url: skills/afmr-ai-verify-reputation-attestation-contract.md
+- type: AgentSkill
+  name: Look up an AFMR failure mode via MCP
+  url: skills/afmr-ai-lookup-failure-mode-via-mcp.md
+x-enrichment:
+  date: '2026-09-19'
+  status: enriched
+  artifacts_added: 37
+  pass: local-v3

@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AFMR Discovery",
+  "name_for_model": "afmr_discovery",
+  "description_for_human": "Read AFMR failure modes and discover scoped attestation and lift-evidence contracts.",
+  "description_for_model": "Use this read-only API to discover the AFMR 1.0 failure-mode registry, machine schemas, conforming endpoint registry, reputation-attestation contracts, and configuration-scoped Lift Evidence contract. Never convert AFMR conformance into an unqualified universal safety claim.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://afmr.ai/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://afmr.ai/og.png",
+  "legal_info_url": "https://afmr.ai/"
+}

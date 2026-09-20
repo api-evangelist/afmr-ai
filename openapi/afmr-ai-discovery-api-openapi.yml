@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: AFMR Discovery API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation
+    Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation,
+    confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+paths:
+  /.well-known/afmr.json:
+    get:
+      operationId: getAfmrDiscovery
+      summary: Get the AFMR authority map and machine action path
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /.well-known/agent-card.json:
+    get:
+      operationId: getA2aAgentCard
+      summary: Get the public A2A Agent Card
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /.well-known/mcp.json:
+    get:
+      operationId: getMcpDiscoveryPointer
+      summary: Get the non-normative MCP discovery pointer
+      description: Names the official server.json manifest and the Streamable HTTP endpoint at /api/rpc;
+        /mcp is served as an equivalent alias.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /resources.json:
+    get:
+      operationId: getMachineResourceIndex
+      summary: Get every public machine resource and protocol endpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /server.json:
+    get:
+      operationId: getMcpRegistryManifest
+      summary: Get the official MCP Registry server manifest
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /agents.json:
+    get:
+      operationId: getAgentAndToolIndex
+      summary: Get the consolidated A2A and MCP endpoint index
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /llms.txt:
+    get:
+      operationId: getCompactAgentOrientation
+      summary: Get the compact agent-first orientation
+      responses:
+        '200':
+          $ref: '#/components/responses/TextDocument'
+  /llms-full.txt:
+    get:
+      operationId: getExpandedAgentDocumentation
+      summary: Get expanded terminology, verification, lifecycle, and limit documentation
+      responses:
+        '200':
+          $ref: '#/components/responses/TextDocument'
+  /status.json:
+    get:
+      operationId: getPublicationStatus
+      summary: Get publication, draft, dependency, and lifecycle status
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /changelog.json:
+    get:
+      operationId: getPublicWorkChangelog
+      summary: Get AFMR.ai public-work revisions
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /feed.xml:
+    get:
+      operationId: getUpdateFeed
+      summary: Get the Atom update feed
+      responses:
+        '200':
+          $ref: '#/components/responses/XmlDocument'
+  /sitemap.xml:
+    get:
+      operationId: getSitemap
+      summary: Get the human and machine resource sitemap
+      responses:
+        '200':
+          $ref: '#/components/responses/XmlDocument'
+  /evidence/index.json:
+    get:
+      operationId: getEvidenceMap
+      summary: Get public evidence and source surfaces
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /lift-evidence/index.json:
+    get:
+      operationId: getLiftEvidenceIndex
+      summary: Get the empty configuration-only Lift Evidence index
+      description: No Lift result cards are published. Both the canonical public-card schema and the governed
+        index schema are external to AFMR.ai and currently resolve.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /standards/reputation-attestation/0.1/specification:
+    get:
+      operationId: getReputationAttestationSpecification
+      summary: Get the AFMR Reputation Attestation Working Draft 0.1
+      responses:
+        '200':
+          $ref: '#/components/responses/HtmlDocument'
+  /standards/governance-voting/1.0/contract.json:
+    get:
+      operationId: getGovernanceVotingContract
+      summary: Get the pinned Agentic Substrate ADR-022 Batch-42 governance and voting binding
+      description: Working-draft internal transfer contract. It defines fail-closed conformance evidence
+        and does not represent any valve as conforming.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /standards/reputation-attestation/0.1/schema.json:
+    get:
+      operationId: getReputationAttestationSchema
+      summary: Get the Working Draft 0.1 JSON Schema
+      responses:
+        '200':
+          $ref: '#/components/responses/SchemaDocument'
+  /standards/reputation-attestation/0.1/verifier.json:
+    get:
+      operationId: getVerifierRequirements
+      summary: Get Working Draft verifier requirements and outcomes
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /registries/endpoints/v0.1/index.json:
+    get:
+      operationId: getEndpointConformanceRegistry
+      summary: Get the intentionally empty pre-publication endpoint registry
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+  /api/rpc:
+    post:
+      operationId: mcpJsonRpc
+      summary: Call the public read-only AFMR MCP server
+      description: MCP 2025-11-25 Streamable HTTP at the exact /api/rpc path. The server is stateless
+        and does not expose an SSE listening stream.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: JSON-RPC response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '202':
+          description: Notification accepted
+        '403':
+          description: Browser Origin is not permitted
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+    get:
+      operationId: mcpListeningStream
+      summary: Probe for an optional MCP SSE listening stream
+      description: This stateless server returns 405 because it does not offer an SSE listening stream.
+        JSON-RPC messages use POST.
+      responses:
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /a2a:
+    post:
+      operationId: a2aSendMessage
+      summary: Send a read-only discovery message to the AFMR A2A agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: A2A JSON-RPC response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+components:
+  responses:
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
+          schema:
+            type: object
+    SchemaDocument:
+      description: JSON Schema document
+      content:
+        application/schema+json:
+          schema:
+            type: object
+    TextDocument:
+      description: Plain-text agent documentation
+      content:
+        text/plain:
+          schema:
+            type: string
+    HtmlDocument:
+      description: Human-readable HTML document
+      content:
+        text/html:
+          schema:
+            type: string
+    XmlDocument:
+      description: XML discovery document
+      content:
+        application/xml:
+          schema:
+            type: string
+    MethodNotAllowed:
+      description: Method is not supported; inspect Allow and the machine-readable problem document
+      headers:
+        Allow:
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    JsonRpcRequest:
+      type: object
+      required:
+      - jsonrpc
+      - method
+      properties:
+        jsonrpc:
+          const: '2.0'
+        id:
+          oneOf:
+          - type: string
+          - type: number
+          - type: 'null'
+        method:
+          type: string
+        params:
+          type: object
+          additionalProperties: true
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        jsonrpc:
+          const: '2.0'
+        id: {}
+        result: {}
+        error:
+          type: object
+    Problem:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string

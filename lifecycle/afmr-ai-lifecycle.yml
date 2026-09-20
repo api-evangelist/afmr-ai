@@ -1,0 +1,69 @@
+generated: '2026-09-19'
+method: searched
+source: https://afmr.ai/status.json + https://afmr.ai/changelog.json + https://afmr.ai/openapi.json (info.version) + https://registry.modelcontextprotocol.io/v0/servers?search=afmr + https://afmr.ai/.well-known/afmr.json
+versioning:
+  scheme: semantic (per component) with URL-path versioning for the standards profiles
+  components:
+    - name: AFMR Discovery API (OpenAPI info.version)
+      current: 1.0.1
+    - name: AFMR Discovery MCP server
+      current: 1.0.1 in server.json and the MCP Registry (initialize still reports 1.0.0)
+      registry_history: [{version: 1.0.0, published: '2026-07-30'}, {version: 1.0.1, published: '2026-08-22'}]
+    - name: AFMR Discovery A2A agent card
+      current: 1.0.0
+    - name: AFMR 1.0 failure-mode vocabulary (governed on wulfkaal.github.io)
+      current: '1.0'
+      status: published
+      date: '2026-07-30'
+    - name: AFMR Reputation Attestation profile
+      current: '0.1'
+      status: working-draft
+      path_versioned: /standards/reputation-attestation/0.1/
+    - name: Governance and voting binding
+      current: '1.0'
+      status: working-draft-internal-transfer
+      path_versioned: /standards/governance-voting/1.0/
+    - name: Endpoint-conformance registry
+      current: '0.1'
+      status: pre-publication
+      entries: 0
+    - name: Lift Evidence consumer contract
+      current: 1.0.0
+      status: operational
+      evidence_maturity: configuration_only
+      cards: 0
+  lifecycle_vocabulary: >-
+    The provider publishes an explicit per-component lifecycle vocabulary in status.json
+    (published / working-draft / working-draft-internal-transfer / pre-publication / operational /
+    available) and states that permanent AFMR-F### family identifiers do not change across versions
+    (roadmap item "Align amendments with AFMR 1.1 without changing permanent family identifiers").
+changelog:
+  url: https://afmr.ai/changelog.json
+  artifact: changelog/afmr-ai-changelog.yml
+  vocabulary_changelog: https://wulfkaal.github.io/afmr/CHANGELOG.md
+  feed: https://afmr.ai/feed.xml
+status_page:
+  url: null
+  note: >-
+    No operational (uptime/incident) status page exists. https://afmr.ai/status.json is a
+    PUBLICATION status document (schema.org Dataset listing each component's draft/published state,
+    dependency HTTP checks and a roadmap) — useful, but not a status page, so NO StatusPage pointer is
+    emitted.
+  publication_status_document: https://afmr.ai/status.json
+deprecation_policy:
+  url: null
+  sunset_headers: false
+  note: No deprecation or sunset policy is published and no Deprecation/Sunset headers were observed; NO Deprecation pointer is emitted.
+deprecated_operations: []
+roadmap:
+  url: https://afmr.ai/status.json
+  field: roadmap[]
+  items:
+    - Complete public review of the Reputation Attestation field model.
+    - Settle the proof suite and canonicalization method.
+    - Publish valid, invalid, and indeterminate verification test vectors.
+    - Define signed endpoint-conformance entries and lifecycle caching.
+    - Align amendments with AFMR 1.1 without changing permanent family identifiers.
+    - Register a first endpoint only after evidence review and explicit publication approval.
+sla: null
+last_modified_observed: Thu, 30 Jul 2026 00:00:00 GMT

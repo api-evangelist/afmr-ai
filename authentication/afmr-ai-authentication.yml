@@ -1,0 +1,25 @@
+generated: '2026-09-19'
+method: searched
+source: https://afmr.ai/.well-known/ai-plugin.json (auth.type none) + https://afmr.ai/server.json + https://afmr.ai/.well-known/mcp.json (access public_read_only) + openapi/afmr-ai-discovery-api-openapi.yml (no securitySchemes, no security requirement) + live unauthenticated probes 2026-09-19
+docs: https://afmr.ai/llms-full.txt
+summary: >-
+  Every AFMR surface is public and unauthenticated by design. The OpenAPI declares no securitySchemes
+  and no security requirement; ai-plugin.json states auth.type "none" and is_user_authenticated
+  false; server.json, mcp.json, afmr.json, agents.json and status.json all declare access
+  "public_read_only" for the MCP server and the A2A agent. Live: GET /openapi.json, POST /api/rpc
+  (initialize, tools/list, resources/list, tools/call) and POST /a2a (SendMessage) all returned
+  200 with no credentials.
+schemes: []
+auth_required: false
+public_read_only: true
+oauth2: false
+api_keys: false
+oauth_discovery:
+  oauth-authorization-server: 404
+  oauth-protected-resource: 404
+  openid-configuration: 404
+cors:
+  access_control_allow_origin: '*'
+  access_control_allow_methods: GET, HEAD, OPTIONS
+  note: The OpenAPI's POST /api/rpc declares a 403 "Browser Origin is not permitted" for disallowed browser origins; not observed from a non-browser client.
+write_surface: none

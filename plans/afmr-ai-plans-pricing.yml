@@ -1,0 +1,20 @@
+generated: '2026-09-19'
+method: searched
+source: https://afmr.ai/ (no pricing section; /pricing returns 404 application/problem+json) + https://afmr.ai/openapi.json (info.license CC BY 4.0) + https://afmr.ai/llms-full.txt ("AFMR is not paid work, money, a bounty, revenue, market admission, or transaction authority")
+checked: '2026-09-19'
+plan_count: 0
+prices_published: false
+currency: null
+billing_period: null
+public_signup_pricing: false
+free_tier: true
+summary: >-
+  AFMR publishes no plans and sells nothing. Every surface — the Discovery API, the MCP server, the
+  A2A agent, the standards drafts and schemas — is public, unauthenticated and licensed CC BY 4.0
+  (the OpenAPI info.license and the homepage rel="license" link). There is no pricing page, no
+  sign-up, no API key and no enterprise tier; llms-full.txt states explicitly that AFMR is not a
+  commercial or transactional surface.
+license:
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+plans: []

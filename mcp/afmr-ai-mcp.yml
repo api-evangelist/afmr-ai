@@ -1,0 +1,161 @@
+generated: '2026-09-19'
+method: searched
+status: published
+source: https://afmr.ai/server.json (MCP Registry manifest) + https://afmr.ai/.well-known/mcp.json + live initialize,
+  tools/list, resources/list and tools/call against https://afmr.ai/api/rpc on 2026-09-19
+registry_listing:
+  registry: https://registry.modelcontextprotocol.io
+  name: ai.afmr/discovery
+  latest_version: 1.0.1
+  published: '2026-08-22'
+  first_published: '2026-07-30'
+  status: active
+  query: https://registry.modelcontextprotocol.io/v0/servers?search=afmr
+server:
+  name: ai.afmr/discovery
+  title: AFMR Discovery
+  version_reported_by_initialize: 1.0.0
+  version_in_manifest: 1.0.1
+  transport: streamable-http
+  url: https://afmr.ai/api/rpc
+  alias_url: https://afmr.ai/mcp
+  protocol_version: '2025-11-25'
+  capabilities:
+    resources:
+      listChanged: false
+    tools:
+      listChanged: false
+  instructions: Use this read-only server to discover AFMR 1.0 failure modes, reputation-attestation contracts,
+    and configuration-scoped Lift Evidence artifacts. AFMR records are scoped to named evidence, configuration,
+    governance process, and lifecycle state. They are not unqualified universal safety claims.
+  sse_listening_stream: false
+  sse_note: 'GET /api/rpc and GET /mcp return 405 application/problem+json with Allow: POST, OPTIONS — the server
+    is stateless and documents that it offers no SSE listening stream.'
+deployment:
+  mode: remote
+  endpoint: https://afmr.ai/api/rpc
+  install: null
+  package: null
+  auth: none
+  verified: probed
+  verified_detail: initialize, tools/list, resources/list and a tools/call (lookup_failure_mode id=AFMR-F010 ->
+    "Reward Hacking and Proxy Capture") all returned 200 with no credentials on 2026-09-19.
+auth:
+  methods:
+  - none
+  note: Declared access "public_read_only" in server.json/mcp.json/afmr.json; no oauth-protected-resource or oauth-authorization-server
+    metadata on the host (404).
+tool_count: 4
+tools:
+- name: discover_afmr
+  title: Discover AFMR resources
+  description: Return canonical AFMR specifications, registries, schemas, endpoints, and scope boundaries.
+  inputSchema:
+    type: object
+    additionalProperties: false
+    properties: {}
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
+- name: lookup_failure_mode
+  title: Look up AFMR failure modes
+  description: Find exact AFMR 1.0 failure-mode records by permanent ID or bounded text query.
+  inputSchema:
+    type: object
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+        pattern: ^AFMR-F[0-9]{3}$
+        description: Exact permanent family identifier, for example AFMR-F010.
+      query:
+        type: string
+        minLength: 2
+        maxLength: 100
+        description: Text matched against ID, name, definition, and class.
+      limit:
+        type: integer
+        minimum: 1
+        maximum: 10
+        default: 5
+    anyOf:
+    - required:
+      - id
+    - required:
+      - query
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: true
+- name: get_reputation_attestation_contract
+  title: Get the reputation-attestation contract
+  description: Return the portable attestation, trust-profile, verifier-result, endpoint-registry, and lifecycle
+    contracts.
+  inputSchema:
+    type: object
+    additionalProperties: false
+    properties: {}
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
+- name: get_lift_evidence_contract
+  title: Get the Lift Evidence public-card contract
+  description: Return the stable configuration-scoped public-card schema and empty public index; no results are
+    asserted.
+  inputSchema:
+    type: object
+    additionalProperties: false
+    properties: {}
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
+resource_count: 8
+resources:
+- uri: https://wulfkaal.github.io/afmr/index.json
+  name: Canonical AFMR failure-mode registry
+  description: 'AFMR 1.0 machine index: 32 permanent failure-mode families in eight classes.'
+  mimeType: application/json
+- uri: https://wulfkaal.github.io/afmr/spec-1.0.html
+  name: AFMR 1.0 specification
+  description: Normative AFMR 1.0 specification.
+  mimeType: text/html
+- uri: https://afmr.ai/.well-known/afmr.json
+  name: AFMR discovery document
+  description: Authoritative discovery links for AFMR.ai.
+  mimeType: application/json
+- uri: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+  name: Reputation attestation schema
+  description: Working Draft 0.1 schema for a signed, scoped, lifecycle-aware AFMR reputation attestation.
+  mimeType: application/schema+json
+- uri: https://afmr.ai/standards/reputation-attestation/0.1/verifier.json
+  name: Reputation attestation verifier requirements
+  description: Deterministic validation, proof, scope, evidence, and lifecycle requirements.
+  mimeType: application/json
+- uri: https://afmr.ai/registries/endpoints/v0.1/index.json
+  name: Conforming governance-endpoint registry
+  description: Intentionally empty pre-publication registry; no endpoint conformance is currently claimed.
+  mimeType: application/json
+- uri: https://afmr.ai/lift-evidence/index.json
+  name: Lift evidence public-card index
+  description: Configuration-only empty index. No measured lift results or safety claims are published.
+  mimeType: application/json
+- uri: https://wulfkaal.github.io/afmr/schemas/lift-comparison-public-card-v1.schema.json
+  name: Lift comparison public-card schema
+  description: Canonical stable redacted public-card contract for configuration-scoped cohort comparisons.
+  mimeType: application/schema+json
+evidence_files:
+  tools_list: afmr-ai-mcp-tools-list.json
+  resources_list: afmr-ai-mcp-resources-list.json
+  initialize: afmr-ai-mcp-initialize.json
+  registry_manifest: afmr-ai-server.json
+crosswalk: afmr-ai-tool-crosswalk.yml
+notes: Four of the eight resources live on wulfkaal.github.io (the governed AFMR 1.0 vocabulary authority), which
+  afmr.ai deliberately routes to rather than mirrors. Every tool carries readOnlyHint true / destructiveHint false
+  / idempotentHint true.

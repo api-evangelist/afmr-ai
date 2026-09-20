@@ -1,0 +1,96 @@
+generated: '2026-09-19'
+method: probed
+source: live probes of /.well-known/ on afmr.ai and www.afmr.ai (the only hosts the record knows — apis.yml baseURLs, OpenAPI servers[], the MCP endpoint and the A2A endpoint all sit on afmr.ai)
+summary: >-
+  afmr.ai serves four real well-known documents: an RFC 9116 security.txt, an ai-plugin.json,
+  the A2A agent card (recorded in a2a/), and two provider-specific discovery documents — afmr.json
+  (schema.org DataCatalog authority map, rel="describedby" on every HTML response) and mcp.json (a
+  self-described non-normative MCP server-card pointer). No OAuth/OIDC metadata is served anywhere
+  because the MCP server and API are unauthenticated public read-only surfaces. No api-catalog, no
+  apis.json, no ucp/acp/aauth. www.afmr.ai 301s every path to afmr.ai.
+pointer_basis: >-
+  WellKnown pointer emitted on the strength of the 200s on afmr.ai (security.txt, ai-plugin.json,
+  agent-card.json, afmr.json, mcp.json). SecurityTxt pointer emitted for the served security.txt.
+security_txt_note: >-
+  The served security.txt carries Contact, Canonical, Expires (2027-07-30) and Preferred-Languages but
+  NO Policy, Encryption or Acknowledgments field, and its Contact is the homepage URL https://afmr.ai/,
+  not a mailto: or a disclosure page.
+observation: >-
+  Two early fetches in this run appeared to return other tenants' content; on inspection that was a
+  local scratch-file collision on our side, not anything afmr.ai served. Every document recorded here
+  was re-fetched directly from afmr.ai into an isolated directory and verified by content signature
+  (name / $id / canonical fields) before being saved.
+hosts:
+- host: https://afmr.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: afmr-ai-security.txt
+    content_type: text/plain; charset=utf-8
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: afmr-ai-ai-plugin.json
+    content_type: application/json; charset=utf-8
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: ../a2a/afmr-ai-agent-card.json
+    content_type: application/json; charset=utf-8
+  - path: /.well-known/agent.json
+    status: 200
+    file: ../a2a/afmr-ai-agent-legacy-alias.json
+    content_type: application/json; charset=utf-8
+    note: Not an agent card — a self-described "legacy_discovery_alias" pointing at the canonical card, the A2A endpoint, the MCP endpoint and server.json.
+  - path: /.well-known/afmr.json
+    status: 200
+    file: afmr-ai-afmr.json
+    content_type: application/json; charset=utf-8
+    note: Provider-specific discovery document (schema.org DataCatalog); advertised via Link rel="describedby" on every response and listed in robots.txt and sitemap.xml.
+  - path: /.well-known/mcp.json
+    status: 200
+    file: afmr-ai-mcp.json
+    content_type: application/json; charset=utf-8
+    note: Self-described "non_normative_discovery_pointer" anticipating MCP Server Card discovery; names endpoint https://afmr.ai/api/rpc and the four tools.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/api-catalog.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  note: Every 404 is a real RFC 9457 application/problem+json body ("No AFMR public surface is published at <path>"), not a soft-200 shell, so these are confirmed absences.
+- host: https://www.afmr.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+    redirect: https://afmr.ai/.well-known/security.txt
+  - path: /.well-known/agent-card.json
+    status: 301
+    redirect: https://afmr.ai/.well-known/agent-card.json
+  - path: /.well-known/openid-configuration
+    status: 301
+    redirect: https://afmr.ai/.well-known/openid-configuration
+  note: Canonical-host redirect; every www path 301s to the apex, so afmr.ai's rows above are the answer for this host.
+mcp_host_note: >-
+  The MCP server (https://afmr.ai/api/rpc, alias https://afmr.ai/mcp) shares the primary host, so the
+  RFC 9728 / RFC 8414 rows above ARE the MCP-host probe: oauth-protected-resource and
+  oauth-authorization-server both 404, consistent with the server's declared access "public_read_only".
+a2a:
+  agent_card_found: true
+  host: afmr.ai
+  path: /.well-known/agent-card.json
+  manifest: ../a2a/afmr-ai-a2a.yml

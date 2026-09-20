@@ -1,0 +1,20 @@
+{
+  "status": "non_normative_discovery_pointer",
+  "notice": "This path anticipates MCP Server Card discovery. The current official Registry manifest is server.json.",
+  "name": "ai.afmr/discovery",
+  "title": "AFMR Discovery",
+  "version": "1.0.1",
+  "protocol_version": "2025-11-25",
+  "endpoint": "https://afmr.ai/api/rpc",
+  "endpoint_note": "Canonical endpoint is /api/rpc; /mcp is served as an equivalent alias for convention-following clients. JSON-RPC messages use POST; GET may return 405 when the stateless server does not offer an SSE listening stream.",
+  "transport": "streamable-http",
+  "access": "public_read_only",
+  "registry_manifest": "https://afmr.ai/server.json",
+  "tools": [
+    "discover_afmr",
+    "lookup_failure_mode",
+    "get_reputation_attestation_contract",
+    "get_lift_evidence_contract"
+  ],
+  "scope_notice": "AFMR records are scoped to named evidence, configuration, governance process, and lifecycle state. They are not unqualified universal safety claims."
+}

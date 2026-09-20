@@ -1,0 +1,474 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://afmr.ai/standards/reputation-attestation/0.1/schema.json",
+  "title": "AFMR Reputation Attestation",
+  "description": "Working Draft 0.1. A signed record of scoped expertise-tag standing earned through a governance endpoint with referenced AFMR conformance evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "profile",
+    "id",
+    "issuer",
+    "subject",
+    "standing",
+    "governance",
+    "afmr",
+    "scope",
+    "evidence",
+    "issued_at",
+    "lifecycle",
+    "proof"
+  ],
+  "properties": {
+    "type": {
+      "const": "AFMRReputationAttestation"
+    },
+    "profile": {
+      "const": "https://afmr.ai/standards/reputation-attestation/0.1"
+    },
+    "id": {
+      "type": "string",
+      "format": "uri"
+    },
+    "issuer": {
+      "$ref": "#/$defs/issuer"
+    },
+    "subject": {
+      "$ref": "#/$defs/subject"
+    },
+    "standing": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/standingRecord"
+      }
+    },
+    "governance": {
+      "$ref": "#/$defs/governance"
+    },
+    "afmr": {
+      "$ref": "#/$defs/afmrReference"
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/lifecycle"
+    },
+    "proof": {
+      "$ref": "#/$defs/proof"
+    }
+  },
+  "$defs": {
+    "issuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_id"
+      ],
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "identity_document": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "standingRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expertise_tag",
+        "measurement"
+      ],
+      "properties": {
+        "expertise_tag": {
+          "$ref": "#/$defs/expertiseTag"
+        },
+        "score": {
+          "type": "number"
+        },
+        "band": {
+          "type": "string",
+          "minLength": 1
+        },
+        "measurement": {
+          "$ref": "#/$defs/measurement"
+        },
+        "standing_record": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "score"
+          ]
+        },
+        {
+          "required": [
+            "band"
+          ]
+        }
+      ]
+    },
+    "expertiseTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vocabulary"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vocabulary": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodology",
+        "period_start",
+        "period_end"
+      ],
+      "properties": {
+        "methodology": {
+          "type": "string",
+          "format": "uri"
+        },
+        "period_start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "period_end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint_id",
+        "endpoint_url",
+        "conformance_record",
+        "mechanism_binding"
+      ],
+      "properties": {
+        "endpoint_id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "endpoint_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "conformance_record": {
+          "type": "string",
+          "format": "uri"
+        },
+        "process_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mechanism_binding": {
+          "$ref": "#/$defs/mechanismBinding"
+        }
+      }
+    },
+    "mechanismBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mechanism_id",
+        "source_repository",
+        "source_commit",
+        "contract",
+        "conformance_status",
+        "evidence"
+      ],
+      "properties": {
+        "mechanism_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_repository": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "contract": {
+          "type": "string",
+          "format": "uri"
+        },
+        "conformance_status": {
+          "enum": [
+            "conforming",
+            "nonconforming",
+            "indeterminate"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "afmrReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "authority",
+        "assessment",
+        "conformance_level",
+        "assessment_status"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "authority": {
+          "type": "string",
+          "format": "uri"
+        },
+        "assessment": {
+          "type": "string",
+          "format": "uri"
+        },
+        "conformance_level": {
+          "enum": [
+            "assessing",
+            "attesting"
+          ]
+        },
+        "assessment_status": {
+          "enum": [
+            "active",
+            "suspended",
+            "expired",
+            "revoked",
+            "superseded"
+          ]
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tasks",
+        "market",
+        "geography"
+      ],
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "market": {
+          "type": "string",
+          "minLength": 1
+        },
+        "geography": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "uri",
+        "digest"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "standing-record",
+            "methodology",
+            "afmr-assessment",
+            "governance-record",
+            "governance-mechanism-contract",
+            "rep-ledger",
+            "settlement-proof",
+            "other"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "value"
+          ],
+          "properties": {
+            "algorithm": {
+              "const": "sha256"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[a-fA-F0-9]{64}$"
+            }
+          }
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "status_uri",
+        "valid_from",
+        "valid_until",
+        "updated_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "active",
+            "suspended",
+            "expired",
+            "revoked",
+            "superseded"
+          ]
+        },
+        "status_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "valid_from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "superseded_by": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "created",
+        "verification_method",
+        "proof_purpose",
+        "proof_value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "verification_method": {
+          "type": "string",
+          "format": "uri"
+        },
+        "proof_purpose": {
+          "const": "assertionMethod"
+        },
+        "proof_value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

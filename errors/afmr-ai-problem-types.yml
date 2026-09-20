@@ -1,0 +1,61 @@
+generated: '2026-09-19'
+method: derived
+format: rfc9457
+source: >-
+  Derived from openapi/afmr-ai-discovery-api-openapi.yml (components.schemas.Problem,
+  components.responses.MethodNotAllowed, the 403/405 responses on POST /api/rpc) and enriched with
+  live unauthenticated responses observed on 2026-09-19 (GET /nope -> 404, GET /mcp -> 405,
+  POST /a2a message/send -> 400 JSON-RPC error). Not from a docs error page — the provider publishes none.
+rfc9457: true
+envelope:
+  media_type: application/problem+json
+  default_shape: '{ "type": "about:blank", "title": string, "status": integer, "detail": string, "instance": string, ...extensions }'
+  extensions_observed:
+    - discovery            # https://afmr.ai/.well-known/afmr.json (404 bodies)
+    - resource_index       # https://afmr.ai/resources.json (404 bodies)
+    - authority_note       # (404 bodies)
+    - protocol_version     # 2025-11-25 (405 bodies on the MCP endpoint)
+    - manifest             # https://afmr.ai/server.json (405 bodies)
+  headers:
+    - name: Link
+      value: <https://afmr.ai/.well-known/afmr.json>; rel="describedby"; type="application/json"
+      on: every problem response
+    - name: Allow
+      value: POST, OPTIONS
+      on: 405 from GET /api/rpc and GET /mcp
+    - name: X-Robots-Tag
+      value: noindex
+      on: 404
+problems:
+  - status: 404
+    title: Not Found
+    type: about:blank
+    observed: true
+    example_detail: No AFMR public surface is published at /nope.
+    remediation: Resolve the path from https://afmr.ai/resources.json or /.well-known/afmr.json rather than guessing — every published surface is enumerated there.
+  - status: 405
+    title: Method Not Allowed
+    type: about:blank
+    observed: true
+    operations: [mcpListeningStream]
+    example_detail: This stateless MCP server does not offer an SSE listening stream. Send JSON-RPC messages with POST.
+    remediation: POST JSON-RPC to /api/rpc with Accept including application/json; do not open a GET SSE stream.
+  - status: 403
+    title: Browser Origin is not permitted
+    observed: false
+    operations: [mcpJsonRpc]
+    note: Declared in the spec for disallowed browser Origins on POST /api/rpc; not reproducible from a non-browser client.
+  - status: 202
+    title: Notification accepted
+    observed: false
+    operations: [mcpJsonRpc]
+    note: Declared for JSON-RPC notifications (no id); not an error, listed because it is the only non-200 success.
+jsonrpc_errors:
+  media_type: application/json
+  note: Protocol-level failures inside the MCP and A2A JSON-RPC envelopes are JSON-RPC 2.0 error objects, not problem+json.
+  observed:
+    - endpoint: POST /a2a
+      http_status: 400
+      code: -32004
+      message: Only the read-only SendMessage operation is supported.
+      trigger: JSON-RPC method "message/send" (A2A 0.3-style) — use "SendMessage" (1.0).

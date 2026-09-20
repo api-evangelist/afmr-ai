@@ -1,0 +1,139 @@
+{
+  "@context": "https://schema.org",
+  "@id": "https://afmr.ai/.well-known/afmr.json",
+  "@type": "DataCatalog",
+  "schema_version": "afmr-discovery-0.1",
+  "name": "Agent Failure Mode Registry",
+  "abbreviation": "AFMR",
+  "canonical_site": "https://afmr.ai/",
+  "site_role": "Independent public front door and machine discovery router",
+  "vocabulary": {
+    "name": "Agent Failure Mode Registry",
+    "version": "1.0",
+    "status": "published",
+    "authority": "https://wulfkaal.github.io/afmr/index.json",
+    "human_registry": "https://wulfkaal.github.io/afmr/",
+    "specification": "https://wulfkaal.github.io/afmr/spec-1.0.html",
+    "schema": "https://wulfkaal.github.io/afmr/schema.json",
+    "context": "https://wulfkaal.github.io/afmr/context.jsonld",
+    "changelog": "https://wulfkaal.github.io/afmr/CHANGELOG.md",
+    "source": "https://github.com/wulfkaal/wulfkaal.github.io/tree/main/afmr",
+    "mirror_on_afmr_ai": false,
+    "authority_note": "The GitHub machine index governs AFMR 1.0 identifiers, definitions, trigger conditions, and status. AFMR.ai does not duplicate or redefine that vocabulary."
+  },
+  "protocols": {
+    "mcp": {
+      "name": "ai.afmr/discovery",
+      "endpoint": "https://afmr.ai/api/rpc",
+      "transport": "streamable-http",
+      "protocol_version": "2025-11-25",
+      "access": "public_read_only",
+      "registry_manifest": "https://afmr.ai/server.json",
+      "server_card_pointer": "https://afmr.ai/.well-known/mcp.json",
+      "endpoint_note": "The MCP Streamable HTTP endpoint is /api/rpc. GET may return 405 when the stateless server does not offer an SSE listening stream; JSON-RPC messages use POST."
+    },
+    "a2a": {
+      "agent_card": "https://afmr.ai/.well-known/agent-card.json",
+      "endpoint": "https://afmr.ai/a2a",
+      "protocol_binding": "JSONRPC",
+      "protocol_version": "1.0",
+      "access": "public_read_only",
+      "supported_operation": "SendMessage"
+    }
+  },
+  "indexing": {
+    "robots": "https://afmr.ai/robots.txt",
+    "sitemap": "https://afmr.ai/sitemap.xml",
+    "indexnow_key_location": "https://afmr.ai/67634e02b46542cd96e2cc474f25b865.txt"
+  },
+  "profiles": {
+    "governance_voting_binding": {
+      "version": "1.0",
+      "status": "working-draft-internal-transfer",
+      "contract": "https://afmr.ai/standards/governance-voting/1.0/contract.json",
+      "mechanism": "agentic-substrate-adr-022-batch42",
+      "source_commit": "83eb9770e3567e142580334f030f6f2f5c63b7e4",
+      "claim_boundary": "A source pin or successful test is not deployed endpoint conformance. Missing mandatory evidence is indeterminate; semantic conflict is invalid."
+    },
+    "reputation_attestation": {
+      "version": "0.1",
+      "status": "working-draft",
+      "specification": "https://afmr.ai/standards/reputation-attestation/0.1/specification",
+      "schema": "https://afmr.ai/standards/reputation-attestation/0.1/schema.json",
+      "verifier": "https://afmr.ai/standards/reputation-attestation/0.1/verifier.json",
+      "depends_on_afmr": "1.0",
+      "claim_boundary": "A valid record is scoped evidence of specified expertise-tag standing and referenced governance-process conformance. It is not universal safety, unqualified superiority, admission, or transaction authority."
+    }
+  },
+  "registries": {
+    "endpoint_conformance": {
+      "version": "0.1",
+      "status": "pre-publication",
+      "index": "https://afmr.ai/registries/endpoints/v0.1/index.json"
+    },
+    "assessment_attestation_reference": "https://wulfkaal.github.io/colloquium/"
+  },
+  "evidence": {
+    "discovery": "https://afmr.ai/evidence/index.json",
+    "failure_index": "https://wulfkaal.github.io/failures/index.json",
+    "claim_layer": "https://wulfkaal.github.io/claims/index.json",
+    "bulk_claims": "https://wulfkaal.github.io/claims/all.jsonl",
+    "lift": {
+      "status": "configuration_only",
+      "human": "https://afmr.ai/lift-evidence/",
+      "index": "https://afmr.ai/lift-evidence/index.json",
+      "artifact_schema": "https://wulfkaal.github.io/afmr/schemas/lift-comparison-public-card-v1.schema.json",
+      "artifact_schema_status": "available",
+      "artifact_schema_checked_at": "2026-08-04T16:06:36Z",
+      "cards_published": 0,
+      "claim_boundary": "Configuration-scoped cohort evidence only; not individual reputation, universal lift, a performance guarantee, or a safety guarantee.",
+      "dependency_note": "Both the canonical public-card schema and the governed index schema resolve at their canonical AFMR paths and validate as JSON Schema draft 2020-12. AFMR.ai links to them and does not duplicate or re-canonicalize them."
+    }
+  },
+  "agent_documentation": {
+    "compact": "https://afmr.ai/llms.txt",
+    "expanded": "https://afmr.ai/llms-full.txt",
+    "a2a_agent_card": "https://afmr.ai/.well-known/agent-card.json",
+    "mcp_registry_manifest": "https://afmr.ai/server.json",
+    "openapi": "https://afmr.ai/openapi.json",
+    "resource_index": "https://afmr.ai/resources.json",
+    "agents_index": "https://afmr.ai/agents.json",
+    "feed": "https://afmr.ai/feed.xml",
+    "status": "https://afmr.ai/status.json",
+    "changelog": "https://afmr.ai/changelog.json"
+  },
+  "machine_action_path": [
+    {
+      "step": 1,
+      "action": "resolve_authority",
+      "instruction": "Use vocabulary.authority for AFMR family identifiers and definitions."
+    },
+    {
+      "step": 2,
+      "action": "validate_attestation",
+      "instruction": "Use the exact versioned profile schema named by the candidate record."
+    },
+    {
+      "step": 3,
+      "action": "verify_proof_and_scope",
+      "instruction": "Verify issuer proof, subject, expertise tags, measurement scope, and validity interval."
+    },
+    {
+      "step": 4,
+      "action": "resolve_endpoint_conformance",
+      "instruction": "Resolve the governance endpoint record and its AFMR assessment, evidence, and lifecycle."
+    },
+    {
+      "step": 5,
+      "action": "apply_principal_policy",
+      "instruction": "Keep discovery, admission, trust, and transacting as separate decisions."
+    }
+  ],
+  "outcomes": [
+    "valid",
+    "invalid",
+    "indeterminate"
+  ],
+  "status": "https://afmr.ai/status.json",
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}

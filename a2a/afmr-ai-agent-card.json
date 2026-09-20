@@ -1,0 +1,93 @@
+{
+  "name": "AFMR Discovery Agent",
+  "description": "Read-only discovery for AFMR 1.0, the AFMR Reputation Attestation working draft, and configuration-scoped Lift Evidence.",
+  "supportedInterfaces": [
+    {
+      "url": "https://afmr.ai/a2a",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "provider": {
+    "organization": "Agent Failure Mode Registry",
+    "url": "https://afmr.ai/"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://afmr.ai/llms-full.txt",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "discover-afmr",
+      "name": "Discover AFMR resources",
+      "description": "Returns canonical AFMR authority, schemas, registries, evidence surfaces, current lifecycle status, and explicit decision boundaries.",
+      "tags": [
+        "AFMR",
+        "agent governance",
+        "failure modes",
+        "reputation attestation",
+        "machine-readable standards"
+      ],
+      "examples": [
+        "What machine-readable AFMR resources are available?",
+        "Where is the AFMR Reputation Attestation schema?"
+      ]
+    },
+    {
+      "id": "lookup-afmr-failure-mode",
+      "name": "Look up an AFMR failure mode",
+      "description": "Returns an exact record from the canonical AFMR 1.0 registry when a permanent AFMR-F### identifier is supplied.",
+      "tags": [
+        "AFMR-F",
+        "failure-mode lookup",
+        "permanent identifiers"
+      ],
+      "examples": [
+        "Return AFMR-F010.",
+        "What is AFMR-F025?"
+      ]
+    },
+    {
+      "id": "discover-reputation-attestation",
+      "name": "Discover the Reputation Attestation contract",
+      "description": "Returns the Working Draft 0.1 specification, schema, verifier requirements, endpoint-registry location, lifecycle vocabulary, and explicit interpretation boundaries.",
+      "tags": [
+        "reputation attestation",
+        "working draft",
+        "verifier",
+        "lifecycle",
+        "bounded claims"
+      ],
+      "examples": [
+        "Where is the AFMR Reputation Attestation schema?",
+        "What outcomes may an AFMR verifier return?"
+      ]
+    },
+    {
+      "id": "discover-lift-evidence",
+      "name": "Discover the Lift Evidence contract",
+      "description": "Returns the empty configuration-only index and canonical public-card schema without asserting measured lift, individual reputation, or safety.",
+      "tags": [
+        "lift evidence",
+        "configuration cell",
+        "bounded cohort",
+        "no universal claim"
+      ],
+      "examples": [
+        "Where is the Lift Evidence public-card index?"
+      ]
+    }
+  ],
+  "iconUrl": "https://afmr.ai/og.png"
+}

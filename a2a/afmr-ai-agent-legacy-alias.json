@@ -1,0 +1,7 @@
+{
+  "status": "legacy_discovery_alias",
+  "canonical_agent_card": "https://afmr.ai/.well-known/agent-card.json",
+  "a2a_endpoint": "https://afmr.ai/a2a",
+  "mcp_endpoint": "https://afmr.ai/api/rpc",
+  "mcp_registry_manifest": "https://afmr.ai/server.json"
+}

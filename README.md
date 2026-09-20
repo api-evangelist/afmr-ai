@@ -64,5 +64,5 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Agent Failure Mode Registry is a company surfaced via the API Evangelist harvest backlog (source: a2a-registry) and added to the network as a stub for full-pipeline profiling.
+The Agent Failure Mode Registry (AFMR) is a reputation-integrity standard for agentic commerce. AFMR 1.0 is a published, citable vocabulary of 32 permanent failure-mode families in eight classes describing how autonomous agent systems fail as designed mechanisms; afmr.ai is the independent public front door and machine-discovery router for it. The site publishes a read-only Discovery API described by an OpenAPI 3.1 document (CC BY 4.0), a public read-only MCP server (Streamable HTTP at /api/rpc, listed in the official MCP Registry as ai.afmr/discovery), an A2A 1.0 agent card and JSON-RPC endpoint, llms.txt / llms-full.txt, a Reputation Attestation Working Draft 0.1 (human spec, JSON Schema 2020-12, verifier requirements), a pinned governance-and-voting binding, an intentionally empty endpoint-conformance registry and a configuration-only Lift Evidence index. The AFMR 1.0 vocabulary itself is governed from the editor's GitHub machine index and is not mirrored on afmr.ai.
 - https://afmr.ai/

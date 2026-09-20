@@ -1,0 +1,31 @@
+generated: '2026-09-19'
+method: searched
+source: https://afmr.ai/changelog.json
+scheme: semantic with a review-stage suffix (0.1.0-review, 0.1.1-review) for the AFMR.ai public-work surface; the AFMR 1.0 vocabulary keeps its own changelog at https://wulfkaal.github.io/afmr/CHANGELOG.md
+current_version: 0.1.1-review
+machine_readable: true
+feed: https://afmr.ai/feed.xml
+entries:
+  - version: 0.1.1-review
+    date: '2026-07-30'
+    status: review-ready
+    breaking: false
+    highlights:
+      - Retained the exact MCP Streamable HTTP endpoint at /api/rpc.
+      - Added a consolidated machine resource index and complete read-discovery OpenAPI coverage.
+      - Added CORS, revalidatable cache policies, HTML Link relations, canonical-host redirects, and application/problem+json error semantics at the worker boundary.
+      - Added structured data (Organization, datasets, FAQ markup) and stable section identifiers.
+      - Added the versioned AFMR Agent Discovery Rubric 1.0.0 regression audit.
+      - Preserved the governed AFMR 1.0 machine index as vocabulary authority (32 families not mirrored).
+      - Preserved Lift Evidence as an empty configuration-only consumer surface.
+  - version: 0.1.0-review
+    date: '2026-07-30'
+    status: working-draft
+    breaking: false
+    highlights:
+      - Prepared the independent AFMR.ai human and agent discovery surface.
+      - Declared the AFMR 1.0 GitHub machine index as the sole vocabulary authority.
+      - Introduced the AFMR Reputation Attestation profile 0.1 (working draft) and verifier requirements with valid / invalid / indeterminate outcomes.
+      - Created an intentionally empty pre-publication endpoint-conformance registry.
+      - Added the Phase 1 Lift Evidence consumer route with an empty configuration-only index.
+      - Separated discovery, admission, trust, and transacting throughout the public model.
