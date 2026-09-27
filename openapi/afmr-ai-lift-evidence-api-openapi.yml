@@ -1,0 +1,34 @@
+openapi: 3.2.0
+info:
+  title: AFMR Discovery Lift Evidence API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation, confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+tags:
+- name: Lift Evidence
+paths:
+  /lift-evidence/index.json:
+    get:
+      operationId: getLiftEvidenceIndex
+      summary: Get the empty configuration-only Lift Evidence index
+      description: No Lift result cards are published. Both the canonical public-card schema and the governed index schema are external to AFMR.ai and currently resolve.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - Lift Evidence
+components:
+  responses:
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
+          schema:
+            type: object

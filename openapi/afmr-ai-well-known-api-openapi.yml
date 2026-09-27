@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: AFMR Discovery .well Known API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation, confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+tags:
+- name: .well Known
+paths:
+  /.well-known/afmr.json:
+    get:
+      operationId: getAfmrDiscovery
+      summary: Get the AFMR authority map and machine action path
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - .well Known
+  /.well-known/agent-card.json:
+    get:
+      operationId: getA2aAgentCard
+      summary: Get the public A2A Agent Card
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - .well Known
+  /.well-known/mcp.json:
+    get:
+      operationId: getMcpDiscoveryPointer
+      summary: Get the non-normative MCP discovery pointer
+      description: Names the official server.json manifest and the Streamable HTTP endpoint at /api/rpc; /mcp is served as an equivalent alias.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - .well Known
+components:
+  responses:
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
+          schema:
+            type: object

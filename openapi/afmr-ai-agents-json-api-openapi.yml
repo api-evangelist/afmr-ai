@@ -1,0 +1,33 @@
+openapi: 3.2.0
+info:
+  title: AFMR Discovery Agents.json API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation, confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+tags:
+- name: Agents.json
+paths:
+  /agents.json:
+    get:
+      operationId: getAgentAndToolIndex
+      summary: Get the consolidated A2A and MCP endpoint index
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - Agents.json
+components:
+  responses:
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
+          schema:
+            type: object

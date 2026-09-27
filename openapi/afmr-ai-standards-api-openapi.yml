@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  title: AFMR Discovery Standards API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation, confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+tags:
+- name: Standards
+paths:
+  /standards/reputation-attestation/0.1/specification:
+    get:
+      operationId: getReputationAttestationSpecification
+      summary: Get the AFMR Reputation Attestation Working Draft 0.1
+      responses:
+        '200':
+          $ref: '#/components/responses/HtmlDocument'
+      tags:
+      - Standards
+  /standards/governance-voting/1.0/contract.json:
+    get:
+      operationId: getGovernanceVotingContract
+      summary: Get the pinned Agentic Substrate ADR-022 Batch-42 governance and voting binding
+      description: Working-draft internal transfer contract. It defines fail-closed conformance evidence and does not represent any valve as conforming.
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - Standards
+  /standards/reputation-attestation/0.1/schema.json:
+    get:
+      operationId: getReputationAttestationSchema
+      summary: Get the Working Draft 0.1 JSON Schema
+      responses:
+        '200':
+          $ref: '#/components/responses/SchemaDocument'
+      tags:
+      - Standards
+  /standards/reputation-attestation/0.1/verifier.json:
+    get:
+      operationId: getVerifierRequirements
+      summary: Get Working Draft verifier requirements and outcomes
+      responses:
+        '200':
+          $ref: '#/components/responses/JsonDocument'
+      tags:
+      - Standards
+components:
+  responses:
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
+          schema:
+            type: object
+    HtmlDocument:
+      description: Human-readable HTML document
+      content:
+        text/html:
+          schema:
+            type: string
+    SchemaDocument:
+      description: JSON Schema document
+      content:
+        application/schema+json:
+          schema:
+            type: object

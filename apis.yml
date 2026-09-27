@@ -30,48 +30,12 @@ tags:
 - A2A
 - Machine-Readable Standards
 apis:
-- name: AFMR Discovery API
-  description: 'Read-only discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft and configuration-only
-    Lift Evidence: 21 operations over the discovery documents (afmr.json, agent-card.json, mcp.json, resources.json,
-    server.json, agents.json, llms.txt, status.json, changelog.json, feed.xml, sitemap.xml), the Reputation Attestation
-    specification, JSON Schema and verifier requirements, the governance-voting contract, the endpoint-conformance
-    registry, the evidence map and the Lift Evidence index, plus the MCP JSON-RPC and A2A SendMessage protocol endpoints.
-    No authentication; errors are RFC 9457 application/problem+json.'
-  humanURL: https://afmr.ai/
-  baseURL: https://afmr.ai
-  tags:
-  - Discovery
-  - Standards
-  - Agent Governance
-  - Failure Modes
-  properties:
-  - type: OpenAPI
-    url: openapi/afmr-ai-discovery-api-openapi.yml
-  - type: OpenAPI
-    name: Provider-hosted OpenAPI 3.1 (source of the local copy)
-    url: https://afmr.ai/openapi.json
-  - type: Documentation
-    url: https://afmr.ai/llms-full.txt
-  - type: APIReference
-    url: https://afmr.ai/openapi.json
-  - type: Overlay
-    url: overlays/afmr-ai-discovery-api-overlay.yaml
-  - type: ErrorCatalog
-    url: errors/afmr-ai-problem-types.yml
-  - type: DataModel
-    url: data-model/afmr-ai-data-model.yml
-  - type: JSONSchema
-    name: AFMR Reputation Attestation Working Draft 0.1 (JSON Schema 2020-12, verbatim)
-    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
-  - type: JSONSchema
-    name: Provider-hosted schema
-    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
-  image: https://afmr.ai/og.png
 - name: AFMR Discovery MCP Server
-  description: Public read-only Model Context Protocol server (ai.afmr/discovery, MCP 2025-11-25, Streamable HTTP,
+  description: >-
+    Public read-only Model Context Protocol server (ai.afmr/discovery, MCP 2025-11-25, Streamable HTTP,
     stateless, no SSE listening stream) exposing four tools — discover_afmr, lookup_failure_mode, get_reputation_attestation_contract,
-    get_lift_evidence_contract — and eight resources. Canonical endpoint https://afmr.ai/api/rpc with https://afmr.ai/mcp
-    as an alias; registered in the official MCP Registry.
+    get_lift_evidence_contract — and eight resources. Canonical endpoint https://afmr.ai/api/rpc with
+    https://afmr.ai/mcp as an alias; registered in the official MCP Registry.
   humanURL: https://afmr.ai/
   baseURL: https://afmr.ai/api/rpc
   tags:
@@ -91,12 +55,370 @@ apis:
     name: Live tools/list response (4 tools, real inputSchemas)
     url: mcp/afmr-ai-mcp-tools-list.json
   image: https://afmr.ai/og.png
+- aid: afmr-ai:afmr-ai-a2a-api
+  name: Agent Failure Mode Registry A2a API
+  description: The A2a API from Agent Failure Mode Registry — 1 operation(s) for a2a.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - A2a
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-a2a-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-agents-json-api
+  name: Agent Failure Mode Registry Agents.json API
+  description: The Agents.json API from Agent Failure Mode Registry — 1 operation(s) for agents.json.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Agents.json
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-agents-json-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-changelog-json-api
+  name: Agent Failure Mode Registry Changelog.json API
+  description: >-
+    The Changelog.json API from Agent Failure Mode Registry — 1 operation(s) for changelog.json.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Changelog.json
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-changelog-json-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-evidence-api
+  name: Agent Failure Mode Registry Evidence API
+  description: The Evidence API from Agent Failure Mode Registry — 1 operation(s) for evidence.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Evidence
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-evidence-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-feed-xml-api
+  name: Agent Failure Mode Registry Feed.xml API
+  description: The Feed.xml API from Agent Failure Mode Registry — 1 operation(s) for feed.xml.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Feed.xml
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-feed-xml-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-lift-evidence-api
+  name: Agent Failure Mode Registry Lift Evidence API
+  description: >-
+    The Lift Evidence API from Agent Failure Mode Registry — 1 operation(s) for lift evidence.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Lift Evidence
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-lift-evidence-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-llms-full-txt-api
+  name: Agent Failure Mode Registry Llms Full.txt API
+  description: >-
+    The Llms Full.txt API from Agent Failure Mode Registry — 1 operation(s) for llms full.txt.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Llms Full.txt
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-llms-full-txt-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-llms-txt-api
+  name: Agent Failure Mode Registry Llms.txt API
+  description: The Llms.txt API from Agent Failure Mode Registry — 1 operation(s) for llms.txt.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Llms.txt
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-llms-txt-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-registries-api
+  name: Agent Failure Mode Registry Registries API
+  description: The Registries API from Agent Failure Mode Registry — 1 operation(s) for registries.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Registries
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-registries-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-resources-json-api
+  name: Agent Failure Mode Registry Resources.json API
+  description: >-
+    The Resources.json API from Agent Failure Mode Registry — 1 operation(s) for resources.json.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Resources.json
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-resources-json-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-rpc-api
+  name: Agent Failure Mode Registry Rpc API
+  description: The Rpc API from Agent Failure Mode Registry — 1 operation(s) for rpc.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Rpc
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-rpc-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-server-json-api
+  name: Agent Failure Mode Registry Server.json API
+  description: The Server.json API from Agent Failure Mode Registry — 1 operation(s) for server.json.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Server.json
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-server-json-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-sitemap-xml-api
+  name: Agent Failure Mode Registry Sitemap.xml API
+  description: The Sitemap.xml API from Agent Failure Mode Registry — 1 operation(s) for sitemap.xml.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Sitemap.xml
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-sitemap-xml-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-standards-api
+  name: Agent Failure Mode Registry Standards API
+  description: The Standards API from Agent Failure Mode Registry — 4 operation(s) for standards.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Standards
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-standards-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-status-json-api
+  name: Agent Failure Mode Registry Status.json API
+  description: The Status.json API from Agent Failure Mode Registry — 1 operation(s) for status.json.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - Status.json
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-status-json-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
+- aid: afmr-ai:afmr-ai-well-known-api
+  name: Agent Failure Mode Registry .well Known API
+  description: The .well Known API from Agent Failure Mode Registry — 3 operation(s) for .well known.
+  humanURL: https://afmr.ai/
+  baseURL: https://afmr.ai/api/rpc
+  tags:
+  - .well Known
+  properties:
+  - type: OpenAPI
+    url: openapi/afmr-ai-well-known-api-openapi.yml
+  - type: Documentation
+    url: https://afmr.ai/llms-full.txt
+  - type: APIReference
+    url: https://afmr.ai/openapi.json
+  - type: ErrorCatalog
+    url: errors/afmr-ai-problem-types.yml
+  - type: DataModel
+    url: data-model/afmr-ai-data-model.yml
+  - type: JSONSchema
+    url: json-schema/afmr-ai-reputation-attestation-0.1-schema.json
+  - type: JSONSchema
+    url: https://afmr.ai/standards/reputation-attestation/0.1/schema.json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/afmr-ai-discovery-api-overlay.yaml
 - type: Website
   url: https://afmr.ai/
 - type: VulnerabilityDisclosure
@@ -186,3 +508,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 37
   pass: local-v3
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://afmr.ai/.well-known/agent-card.json"
+  grade: "flavored"
+  protocol_version: "1.0"
+  control: 404

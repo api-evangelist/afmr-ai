@@ -1,0 +1,33 @@
+openapi: 3.2.0
+info:
+  title: AFMR Discovery Llms.txt API
+  version: 1.0.1
+  description: Institutionally neutral, read-oriented discovery for AFMR 1.0, the AFMR Reputation Attestation Working Draft, and configuration-only Lift Evidence. Nothing described here issues an attestation, confers market admission, establishes universal trust or safety, or authorizes a transaction.
+  contact:
+    name: Agent Failure Mode Registry
+    url: https://afmr.ai/
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://afmr.ai
+tags:
+- name: Llms.txt
+paths:
+  /llms.txt:
+    get:
+      operationId: getCompactAgentOrientation
+      summary: Get the compact agent-first orientation
+      responses:
+        '200':
+          $ref: '#/components/responses/TextDocument'
+      tags:
+      - Llms.txt
+components:
+  responses:
+    TextDocument:
+      description: Plain-text agent documentation
+      content:
+        text/plain:
+          schema:
+            type: string
