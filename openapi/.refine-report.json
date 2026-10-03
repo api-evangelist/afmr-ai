@@ -21,9 +21,7 @@
     "afmr-ai-standards-api-openapi.yml",
     "afmr-ai-status-json-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -67,10 +65,24 @@
     "afmr-ai-openapi.json: declared missing tag: Sitemap.xml",
     "afmr-ai-openapi.json: declared missing tag: Standards",
     "afmr-ai-openapi.json: declared missing tag: Status.json",
-    "superseded outputs removed: afmr-ai-discovery-api-openapi.yml",
-    "apis.yml register: written (+16 apis, 17 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
-    "afmr-ai-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "afmr-ai-a2a-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-agents-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-changelog-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-evidence-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-feed-xml-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-lift-evidence-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-llms-full-txt-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-llms-txt-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-registries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-resources-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-rpc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-server-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-sitemap-xml-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-standards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-status-json-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "afmr-ai-well-known-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

@@ -36,17 +36,6 @@ paths:
       tags:
       - A2a
 components:
-  responses:
-    MethodNotAllowed:
-      description: Method is not supported; inspect Allow and the machine-readable problem document
-      headers:
-        Allow:
-          schema:
-            type: string
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
   schemas:
     Problem:
       type: object
@@ -95,3 +84,14 @@ components:
         result: {}
         error:
           type: object
+  responses:
+    MethodNotAllowed:
+      description: Method is not supported; inspect Allow and the machine-readable problem document
+      headers:
+        Allow:
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
