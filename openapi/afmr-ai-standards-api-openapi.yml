@@ -53,12 +53,6 @@ paths:
       - Standards
 components:
   responses:
-    JsonDocument:
-      description: Machine-readable JSON document
-      content:
-        application/json:
-          schema:
-            type: object
     HtmlDocument:
       description: Human-readable HTML document
       content:
@@ -69,5 +63,11 @@ components:
       description: JSON Schema document
       content:
         application/schema+json:
+          schema:
+            type: object
+    JsonDocument:
+      description: Machine-readable JSON document
+      content:
+        application/json:
           schema:
             type: object

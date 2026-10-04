@@ -54,6 +54,18 @@ components:
           type: string
         instance:
           type: string
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        jsonrpc:
+          const: '2.0'
+        id: {}
+        result: {}
+        error:
+          type: object
     JsonRpcRequest:
       type: object
       required:
@@ -72,18 +84,6 @@ components:
         params:
           type: object
           additionalProperties: true
-    JsonRpcResponse:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      properties:
-        jsonrpc:
-          const: '2.0'
-        id: {}
-        result: {}
-        error:
-          type: object
   responses:
     MethodNotAllowed:
       description: Method is not supported; inspect Allow and the machine-readable problem document
