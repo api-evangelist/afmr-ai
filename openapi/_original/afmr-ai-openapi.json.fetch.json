@@ -1,0 +1,12 @@
+{
+ "url": "https://afmr.ai/openapi.json",
+ "requested_url": "https://afmr.ai/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 12536,
+ "sha256": "aff9ae741b8fdf748506d15e1233fa4a4dcdefbd5b44843bb03882dcfd513df9",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
