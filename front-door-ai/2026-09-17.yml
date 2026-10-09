@@ -1,0 +1,30 @@
+# Front Door AI Index — afmr-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: afmr-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: afmr.ai
+  final_host: afmr.ai
+  ownership: own
+  owner: afmr-ai
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 9
+  band: 4
+  band_label: moderate
+  host_score: 9
+  density: 9.45
+  words: 952
+  tiers:
+    agentic: 9
+    core: 0
+    model: 0
+  ambiguous: 18
+  top_terms:
+    agent: 18
+    agentic: 7
+    MCP: 2
