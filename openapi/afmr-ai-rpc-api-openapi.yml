@@ -50,36 +50,18 @@ paths:
       tags:
       - RPC
 components:
+  responses:
+    MethodNotAllowed:
+      description: Method is not supported; inspect Allow and the machine-readable problem document
+      headers:
+        Allow:
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
   schemas:
-    Problem:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
-    JsonRpcResponse:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      properties:
-        jsonrpc:
-          const: '2.0'
-        id: {}
-        result: {}
-        error:
-          type: object
     JsonRpcRequest:
       type: object
       required:
@@ -98,14 +80,32 @@ components:
         params:
           type: object
           additionalProperties: true
-  responses:
-    MethodNotAllowed:
-      description: Method is not supported; inspect Allow and the machine-readable problem document
-      headers:
-        Allow:
-          schema:
-            type: string
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        jsonrpc:
+          const: '2.0'
+        id: {}
+        result: {}
+        error:
+          type: object
+    Problem:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
