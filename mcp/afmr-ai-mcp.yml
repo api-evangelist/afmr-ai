@@ -1,8 +1,8 @@
 generated: '2026-09-19'
 method: searched
 status: published
-source: https://afmr.ai/server.json (MCP Registry manifest) + https://afmr.ai/.well-known/mcp.json + live initialize,
-  tools/list, resources/list and tools/call against https://afmr.ai/api/rpc on 2026-09-19
+source: https://afmr.ai/server.json (MCP Registry manifest) + https://afmr.ai/.well-known/mcp.json + live
+  initialize, tools/list, resources/list and tools/call against https://afmr.ai/api/rpc on 2026-09-19
 registry_listing:
   registry: https://registry.modelcontextprotocol.io
   name: ai.afmr/discovery
@@ -29,8 +29,8 @@ server:
     and configuration-scoped Lift Evidence artifacts. AFMR records are scoped to named evidence, configuration,
     governance process, and lifecycle state. They are not unqualified universal safety claims.
   sse_listening_stream: false
-  sse_note: 'GET /api/rpc and GET /mcp return 405 application/problem+json with Allow: POST, OPTIONS — the server
-    is stateless and documents that it offers no SSE listening stream.'
+  sse_note: 'GET /api/rpc and GET /mcp return 405 application/problem+json with Allow: POST, OPTIONS —
+    the server is stateless and documents that it offers no SSE listening stream.'
 deployment:
   mode: remote
   endpoint: https://afmr.ai/api/rpc
@@ -38,13 +38,13 @@ deployment:
   package: null
   auth: none
   verified: probed
-  verified_detail: initialize, tools/list, resources/list and a tools/call (lookup_failure_mode id=AFMR-F010 ->
-    "Reward Hacking and Proxy Capture") all returned 200 with no credentials on 2026-09-19.
+  verified_detail: initialize, tools/list, resources/list and a tools/call (lookup_failure_mode id=AFMR-F010
+    -> "Reward Hacking and Proxy Capture") all returned 200 with no credentials on 2026-09-19.
 auth:
   methods:
   - none
-  note: Declared access "public_read_only" in server.json/mcp.json/afmr.json; no oauth-protected-resource or oauth-authorization-server
-    metadata on the host (404).
+  note: Declared access "public_read_only" in server.json/mcp.json/afmr.json; no oauth-protected-resource
+    or oauth-authorization-server metadata on the host (404).
 tool_count: 4
 tools:
 - name: discover_afmr
@@ -92,8 +92,8 @@ tools:
     openWorldHint: true
 - name: get_reputation_attestation_contract
   title: Get the reputation-attestation contract
-  description: Return the portable attestation, trust-profile, verifier-result, endpoint-registry, and lifecycle
-    contracts.
+  description: Return the portable attestation, trust-profile, verifier-result, endpoint-registry, and
+    lifecycle contracts.
   inputSchema:
     type: object
     additionalProperties: false
@@ -105,8 +105,8 @@ tools:
     openWorldHint: false
 - name: get_lift_evidence_contract
   title: Get the Lift Evidence public-card contract
-  description: Return the stable configuration-scoped public-card schema and empty public index; no results are
-    asserted.
+  description: Return the stable configuration-scoped public-card schema and empty public index; no results
+    are asserted.
   inputSchema:
     type: object
     additionalProperties: false
@@ -156,6 +156,31 @@ evidence_files:
   initialize: afmr-ai-mcp-initialize.json
   registry_manifest: afmr-ai-server.json
 crosswalk: afmr-ai-tool-crosswalk.yml
-notes: Four of the eight resources live on wulfkaal.github.io (the governed AFMR 1.0 vocabulary authority), which
-  afmr.ai deliberately routes to rather than mirrors. Every tool carries readOnlyHint true / destructiveHint false
-  / idempotentHint true.
+notes: Four of the eight resources live on wulfkaal.github.io (the governed AFMR 1.0 vocabulary authority),
+  which afmr.ai deliberately routes to rather than mirrors. Every tool carries readOnlyHint true / destructiveHint
+  false / idempotentHint true.
+tool_quality:
+  tool_count: 4
+  tokens_total: 401
+  tokens_per_tool_median: 82
+  heavy_tools: []
+  heavy_tool_count: 0
+  params_total: 3
+  params_undescribed: 1
+  params_described_pct: 66.7
+  tools_with_undescribed_params: 1
+  tools_annotated: 4
+  annotated_pct: 100.0
+  state_changing_unhinted: []
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 0
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/afmr-ai-mcp-tools-list.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.
