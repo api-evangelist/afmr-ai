@@ -48,8 +48,8 @@ auth:
 tool_count: 4
 tools:
 - name: discover_afmr
-  title: Discover AFMR resources
   description: Return canonical AFMR specifications, registries, schemas, endpoints, and scope boundaries.
+  title: Discover AFMR resources
   inputSchema:
     type: object
     additionalProperties: false
@@ -60,8 +60,8 @@ tools:
     idempotentHint: true
     openWorldHint: false
 - name: lookup_failure_mode
-  title: Look up AFMR failure modes
   description: Find exact AFMR 1.0 failure-mode records by permanent ID or bounded text query.
+  title: Look up AFMR failure modes
   inputSchema:
     type: object
     additionalProperties: false
@@ -91,9 +91,9 @@ tools:
     idempotentHint: true
     openWorldHint: true
 - name: get_reputation_attestation_contract
-  title: Get the reputation-attestation contract
   description: Return the portable attestation, trust-profile, verifier-result, endpoint-registry, and
     lifecycle contracts.
+  title: Get the reputation-attestation contract
   inputSchema:
     type: object
     additionalProperties: false
@@ -104,9 +104,9 @@ tools:
     idempotentHint: true
     openWorldHint: false
 - name: get_lift_evidence_contract
-  title: Get the Lift Evidence public-card contract
   description: Return the stable configuration-scoped public-card schema and empty public index; no results
     are asserted.
+  title: Get the Lift Evidence public-card contract
   inputSchema:
     type: object
     additionalProperties: false
@@ -184,3 +184,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 4
