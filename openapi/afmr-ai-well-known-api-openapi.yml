@@ -50,3 +50,9 @@ components:
         application/json:
           schema:
             type: object
+x-provenance:
+  method: harvested
+  publisher: Agent Failure Mode Registry
+  source: https://afmr.ai/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
